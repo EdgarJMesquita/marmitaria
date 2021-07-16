@@ -1,0 +1,44 @@
+
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 4rem;
+  width: 100%;
+  background-color: #FFE194;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  img {
+    width: 2rem;
+    height: auto;
+  }
+
+  img:nth-child(2) {
+    width: 2.2rem;
+
+  }
+
+  div {
+    position: relative;
+    
+      span {
+        position: absolute;
+        bottom: 1rem;
+        right: 0;
+        background-color: #FA8938;
+        color: #fff;
+        font-size: 0.75rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  
+
+}
