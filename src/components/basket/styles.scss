@@ -1,0 +1,32 @@
+
+ul {
+  position: fixed;
+  bottom: 4rem;
+
+  width: 100%;
+  height: 4.5rem;
+  padding: .5rem;
+  border-top: 2px dotted #A8A8B3;
+  border-bottom: 2px dotted #A8A8B3;
+  
+  list-style-type: none;
+
+  display: flex;
+  gap: 1rem;
+  
+  overflow-x: scroll;
+  
+  background-color: #ECEAEA;
+
+  li {
+    position: relative;
+
+    img.close {
+      height: 2.3rem;
+      width: 2.3rem;
+      position: absolute;
+      top: -12px;
+      right: -9px;
+    }
+  }
+}
