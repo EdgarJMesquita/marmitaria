@@ -7,6 +7,7 @@ type OrderProps = {
   content: string;
   image: string;
   isSelected: boolean;
+  type: string;
 }
 
 type BananaProps = {
@@ -21,14 +22,14 @@ export function Basket({order}:BananaProps){
         order.length > 0 && (
           <ul>
             {
-               order.map(item=>{
+              order.map(item=>{
                 if(!item.isSelected) return null;
-                return(
-                  <li onClick={()=>handleBasket(item?.id)} key={item.id}>
-                    <img src={item.image} alt={item.content} />
-                    <img className="close" src={closeImg} alt="close" />
-                  </li>
-                )
+                  return(
+                    <li onClick={()=>handleBasket(item.id)} key={item.id}>
+                      <img src={item.image} alt={item.content} />
+                      <img className="close" src={closeImg} alt="close" />
+                    </li>
+                  )
               })
             }
           </ul>

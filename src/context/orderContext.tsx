@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useState, useEffect } from 'react';
 import { database } from '../services/firebase';
 
+
+
 /* const Menu = {
   misturas: [
     {
@@ -68,23 +70,59 @@ type OrderProps = {
   content: string;
   image: string;
   isSelected: boolean;
-};
-
-type MenuProps = {
-  misturas: OrderProps[];
-  guarnicoes: OrderProps[];
+  type: string;
 };
 
 type ContextProps = {
   handleBasket: (id:string)=>void;
   order: OrderProps[];
   count: number;
-  menu: MenuProps | undefined;
 }
 
 const OrderContext = createContext({} as ContextProps);
 
 function OrderContextProvider(props:OrderContextProviderProps){
+
+  const [ order, setOrder] = useState<OrderProps[]>([]);
+  const [ count, setCount] = useState(0);
+
+  useEffect(()=>{
+      const count = order.filter(item=>item.isSelected);
+      setCount(count.length);
+
+  },[order]);
+
+  useEffect(()=>{
+    const menuRef = database.ref('menu');
+
+    menuRef.once('value',(snap)=>{
+      const data:OrderProps[] = snap.val();
+      setOrder(data);
+     
+    });
+  },[]);
+
+  function handleBasket(id:string){
+    const updatedOrder = order.map(item=>item.id===id? {...item, isSelected:!item.isSelected} : {...item});
+    setOrder(updatedOrder);
+    
+  }
+
+  
+  return(
+    <OrderContext.Provider value={{
+      order,
+      handleBasket,
+      count
+    }}>
+      {props.children}
+    </OrderContext.Provider>
+  );
+}
+
+export { OrderContext , OrderContextProvider}
+
+/* function OrderContextProvider(props:OrderContextProviderProps){
 
   const [ menu, setMenu ] = useState<MenuProps>();
   const [ order, setOrder] = useState<OrderProps[]>([]);
@@ -124,4 +162,4 @@ function OrderContextProvider(props:OrderContextProviderProps){
   );
 }
 
-export { OrderContext , OrderContextProvider}
+export { OrderContext , OrderContextProvider} */
