@@ -1,27 +1,17 @@
 import { MenuSection } from '../menuSection';
+import { MenuProps } from '../../types';
+import './style.scss';
 
-type OrderProps = {
-  id: string;
-  content: string;
-  image: string;
-  isSelected: boolean;
-  type: string;
-};
-
-type MenuProps = {
-  order: OrderProps[];
-};
-
-export function Menu({order}:MenuProps){
+export function Menu({menu}:MenuProps){
   return(
     <div className="menu">
         <section>
           <h1>Misturas</h1>
-          <MenuSection foodType="misturas" order={order}/>
+          <MenuSection foodType="misturas" menu={menu}/>
         </section>
         <section>
           <h1>Guarnições</h1>
-          <MenuSection foodType="guarnicoes" order={order}/>          
+          <MenuSection foodType="guarnicoes" menu={menu}/>          
         </section>
       </div>
   )

@@ -1,20 +1,23 @@
+import { useOrder } from '../../hooks/useOrder';
 import userIcon from '../../assets/images/user.svg';
 import checkIcon from '../../assets/images/check.svg';
 import basketIcon from '../../assets/images/basket.svg';
 import './styles.scss';
+import { useHistory } from 'react-router-dom';
 
 
-type FooterProps = {
-  count: number;
-}
+export function Footer(){
+  const { count } = useOrder();
+  const history = useHistory();
 
-export function Footer({count}:FooterProps){
+
+
   return(
     <footer>
-      <img src={userIcon} alt="user" />
+      <img onClick={()=>history.push('/user')} src={userIcon} alt="user" />
       <img src={checkIcon} alt="check" />
       <div>
-        <img src={basketIcon} alt="cestinha" />
+        <img onClick={()=>history.push('/')} src={basketIcon} alt="cestinha" />
         {count > 0 && (
           <span>{count}</span>
         )}

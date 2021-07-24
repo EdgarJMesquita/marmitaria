@@ -1,23 +1,12 @@
-import { MenuItem } from "../menuItem";
 
-type OrderProps = {
-  id: string;
-  content: string;
-  image: string;
-  isSelected: boolean;
-  type: string;
-};
+import { MenuItem } from '../menuItem';
+import { MenuSectionProps } from '../../types';
 
-type MenuSectionProps = {
-  order: OrderProps[];
-  foodType: string;
-};
-
-export function MenuSection({order, foodType}:MenuSectionProps){
+export function MenuSection({ menu, foodType }:MenuSectionProps){
   return(
-    <div>
-      { order?(
-          order.map(item=>{
+    <div className="menu-section">
+      { menu?(
+          menu.map(item=>{
             return(
               item.type===foodType && <MenuItem item={item} key={item.id}/>
             )

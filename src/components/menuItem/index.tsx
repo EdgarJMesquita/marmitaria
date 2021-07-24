@@ -1,13 +1,6 @@
-
+import checkedIcon from '../../assets/images/selected.svg';
 import { useOrder} from '../../hooks/useOrder';
-
-type OrderProps = {
-  id: string;
-  content: string;
-  image: string;
-  isSelected: boolean;
-  type: string;
-};
+import { OrderProps } from '../../types';
 
 type ItemProps = {
   item: OrderProps;
@@ -16,8 +9,9 @@ type ItemProps = {
 export function MenuItem({item}:ItemProps){
 const { handleBasket } = useOrder();
   return(
-    <div key={item.id} onClick={()=>handleBasket(item.id)}>
+    <div className="menu-item" onClick={()=>handleBasket(item.id)}>
       <img src={item.image} alt={item.id} />
+      {item.isSelected && <img className="selected" src={checkedIcon} alt="checked" />}
       <p>{item.content}</p>
     </div>
   )
