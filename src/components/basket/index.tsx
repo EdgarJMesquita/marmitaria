@@ -11,7 +11,6 @@ export function Basket({order}:BananaProps){
   const { handleBasket } = useOrder();
 
   return(
-    <div>
       <ul>
         { order.map(item=>{
           return(
@@ -23,7 +22,6 @@ export function Basket({order}:BananaProps){
         })
         }
       </ul>
-    </div>
   )
 }
 

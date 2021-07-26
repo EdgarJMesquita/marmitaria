@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { OrderContextProvider } from '../src/context/orderContext';
-import { UserContextProvider } from './context/userContext';
+import { OrderContextProvider } from './context/OrderContext';
+import { UserContextProvider } from './context/UserContext';
 import { Home } from './pages/home';
-import { User } from './pages/user';
+import { Cadastro } from './pages/cadastro';
 import './styles/global.scss';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <UserContextProvider>
           <Switch>
             <Route path="/" exact component={ Home } />
-            <Route path="/user" component={ User } />
+            <Route path="/cadastro" component={ Cadastro } />
           </Switch>
         </UserContextProvider>
       </OrderContextProvider>

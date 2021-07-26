@@ -1,6 +1,7 @@
-import checkedIcon from '../../assets/images/selected.svg';
-import { useOrder} from '../../hooks/useOrder';
-import { OrderProps } from '../../types';
+import selectedIcon from '../../../assets/images/selected.svg';
+import { useOrder} from '../../../hooks/useOrder';
+import { OrderProps } from '../../../types';
+import './style.scss';
 
 type ItemProps = {
   item: OrderProps;
@@ -11,7 +12,7 @@ const { handleBasket } = useOrder();
   return(
     <div className="menu-item" onClick={()=>handleBasket(item.id)}>
       <img src={item.image} alt={item.id} />
-      {item.isSelected && <img className="selected" src={checkedIcon} alt="checked" />}
+      {item.isSelected && <img className="selected" src={selectedIcon} alt="checked" />}
       <p>{item.content}</p>
     </div>
   )

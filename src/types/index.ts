@@ -23,6 +23,7 @@ export type OrderContextProviderProps = {
 
 export type ContextProps = {
   handleBasket: (id:string)=>void;
+  clearOrder: ()=>void;
   menu: OrderProps[];
   order: OrderProps[];
   count: number;

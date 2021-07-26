@@ -14,7 +14,7 @@ export function Footer(){
 
   return(
     <footer>
-      <img onClick={()=>history.push('/user')} src={userIcon} alt="user" />
+      <img onClick={()=>history.push('/cadastro')} src={userIcon} alt="user" />
       <img src={checkIcon} alt="check" />
       <div>
         <img onClick={()=>history.push('/')} src={basketIcon} alt="cestinha" />

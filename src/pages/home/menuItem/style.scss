@@ -1,0 +1,27 @@
+
+  .menu-item {
+    position: relative;
+    width: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+
+    img {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+
+      &.selected {
+        position: absolute;
+        top: -9px;
+        right: -2px;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+
+    p {
+      text-align: center;
+    }
+  }

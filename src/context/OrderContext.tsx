@@ -27,19 +27,24 @@ function OrderContextProvider(props:OrderContextProviderProps){
      
     });
   },[]);
-
+ 
   function handleBasket(id:string){
     const updatedOrder = menu.map(item=>item.id===id? {...item, isSelected:!item.isSelected} : {...item});
     setMenu(updatedOrder);
     
   }
 
+  function clearOrder(){
+    const emptyOrder = menu.map(item=>({...item, isSelected: false}))
+    setMenu(emptyOrder);
+  }
   
   return(
     <OrderContext.Provider value={{
       menu,
       order,
       handleBasket,
+      clearOrder,
       count
     }}>
       {props.children}
