@@ -7,24 +7,13 @@ import { OrderProps, OrderContextProviderProps, ContextProps } from '../types';
 const OrderContext = createContext({} as ContextProps);
 
 function OrderContextProvider(props:OrderContextProviderProps){
-
-  const [ order, setOrder] = useState<OrderProps[]>([]);
   const [ menu, setMenu] = useState<OrderProps[]>([]);
-  const [ count, setCount] = useState(0);
-
-  useEffect(()=>{
-      const updatedOrder = menu.filter(item=>item.isSelected);
-      setOrder(updatedOrder);
-      setCount(updatedOrder.length);
-
-  },[menu]);
 
   useEffect(()=>{
     const menuRef = database.ref('menu');
     menuRef.once('value',(snap)=>{
       const data:OrderProps[] = snap.val();
       setMenu(data);
-     
     });
   },[]);
  
@@ -42,10 +31,8 @@ function OrderContextProvider(props:OrderContextProviderProps){
   return(
     <OrderContext.Provider value={{
       menu,
-      order,
       handleBasket,
-      clearOrder,
-      count
+      clearOrder
     }}>
       {props.children}
     </OrderContext.Provider>

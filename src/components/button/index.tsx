@@ -5,10 +5,11 @@ import './style.scss';
 
 export function Button(){
   const history = useHistory();
-  const { order } = useOrder();
+  const { menu } = useOrder();
 
   function checkOrder(){
-    if(order.length<1){
+    const selected = menu.map(item=>item.isSelected).length;
+    if(selected < 1 ){
       Swal({
         text:'Escolha seu prato para continuar',
         icon: 'info'
@@ -17,6 +18,7 @@ export function Button(){
     }
     history.push('/cadastro');
   }
+
 
   return(
     <div className="btn-con">

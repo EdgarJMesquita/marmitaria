@@ -36,7 +36,7 @@ type CepProps = {
 const UserContext = createContext({} as UserContextProps)
 
 function UserContextProvider(props:OrderContextProviderProps){
-  const {order, clearOrder } = useOrder();
+  const {menu, clearOrder} = useOrder();
   const [name, setName] = useState('');
   const [cep, setCep] = useState('');
   const [rua, setRua] = useState('');
@@ -125,7 +125,9 @@ function UserContextProvider(props:OrderContextProviderProps){
   function handleSendOrder(event:FormEvent){
     event.preventDefault();
 
-    if(order.length < 1) Swal({
+    const selected = menu.filter(item=>item.isSelected);
+
+    if(selected.length < 1) Swal({
       title:'Sua cestinha está vazia',
       text: 'Você ainda não escolheu seu prato, deseja ir ao menu?',
       icon: 'info',
@@ -143,13 +145,11 @@ function UserContextProvider(props:OrderContextProviderProps){
       }
     }).then(res=>res && history.push('/'));
 
-
-
-    if(name && rua && numero && bairro && order.length > 0) {
+    if(name && rua && numero && bairro && selected.length > 0) {
       
       const orderRef = database.ref('orders');
       orderRef.push({
-        order: order.map(item=>(item.content)),
+        order: selected.map(item=>item.content),
         name,
         cep,
         rua,
@@ -181,7 +181,6 @@ function UserContextProvider(props:OrderContextProviderProps){
       setHasFailed(true);
     }
   }
-
 
   return(
     <UserContext.Provider value={{

@@ -7,10 +7,8 @@ import { useHistory } from 'react-router-dom';
 
 
 export function Footer(){
-  const { count } = useOrder();
   const history = useHistory();
-
-
+  const { menu } = useOrder();
 
   return(
     <footer>
@@ -18,8 +16,8 @@ export function Footer(){
       <img src={checkIcon} alt="check" />
       <div>
         <img onClick={()=>history.push('/')} src={basketIcon} alt="cestinha" />
-        {count > 0 && (
-          <span>{count}</span>
+        {menu.length > 0 && (
+          <span>{menu.length}</span>
         )}
       </div>
     </footer>

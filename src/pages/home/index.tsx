@@ -5,12 +5,12 @@ import { Menu } from './menu';
 import { useOrder } from '../../hooks/useOrder';
 
 export function Home(){
-  const { menu, order } = useOrder();
+  const { menu } = useOrder();
 
   return(
     <>
       <Menu menu={menu}/>
-      <Basket order={order}/>
+      <Basket order={menu}/>
     </>
   )
 }
