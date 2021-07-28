@@ -6,11 +6,11 @@ import { Signed } from './signed';
 import { Voltar } from './voltarButton';
 
 // Hooks
-import { useUser } from '../../hooks/useUser';
 import { useOrder } from '../../hooks/useOrder';
+import { useAuth } from '../../hooks/useAuth';
 
 export function Cadastro(){
-  const { user } = useUser();
+  const { user } = useAuth();
   const { menu } = useOrder();
  
   return(

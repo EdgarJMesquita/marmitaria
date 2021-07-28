@@ -1,9 +1,9 @@
 import googleLogo from '../../../assets/images/googleLogo.svg';
-import { useUser } from '../../../hooks/useUser';
+import { useAuth } from '../../../hooks/useAuth';
 import './style.scss';
 
 export function SignIn(){
-  const { signInWithGoogle } = useUser();
+  const { signInWithGoogle } = useAuth();
   return(
     <div className="login-button-container">
       <button onClick={signInWithGoogle} >

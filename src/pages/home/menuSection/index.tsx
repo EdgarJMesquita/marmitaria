@@ -1,7 +1,13 @@
 
 import { MenuItem } from '../menuItem';
-import { MenuSectionProps } from '../../../types';
+import { OrderProps } from '../../../types';
 import './style.scss';
+
+type MenuSectionProps = {
+  title: string;
+  foodType: string;
+  menu: OrderProps[];
+};
 
 export function MenuSection({ title, menu, foodType }:MenuSectionProps){
   return(

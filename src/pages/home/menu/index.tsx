@@ -8,13 +8,9 @@ export function Menu({menu}:MenuProps){
   const history = useHistory();
 
   function checkOrder(){
-    const selected = menu.filter(item=>item.isSelected).length;
-
-    if(selected < 1){
-      Swal({
-        text:'Escolha seu prato para continuar',
-        icon: 'info'
-      })
+    const selectedItens = menu.filter(item=>item.isSelected).length;
+    if(selectedItens < 1){
+      Swal('Cesta vazia','Escolha seu prato para continuar','info');
       return;
     }
     history.push('/cadastro')
@@ -23,7 +19,7 @@ export function Menu({menu}:MenuProps){
   return(
     <div className="menu">
         <MenuSection title="Misturas" foodType="misturas" menu={menu}/>
-        <MenuSection title="Guarnições" foodType="guarnicoes" menu={menu}/>          
+        <MenuSection title="Guarnições" foodType="guarnicoes" menu={menu}/>
         <div className="btn-con">
           <button onClick={checkOrder}>Continuar</button>
         </div>

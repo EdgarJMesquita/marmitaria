@@ -1,32 +1,26 @@
 
 import { createContext, FormEvent, useEffect, useState } from 'react';
 import { useOrder } from '../hooks/useOrder';
-import { firebase, auth, database } from '../services/firebase';
+import { database } from '../services/firebase';
 import { OrderContextProviderProps } from '../types';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert';
+import { useAuth } from '../hooks/useAuth';
 
 
-type UserProps = {
-  id: string;
+type AddressProps = {
   name: string;
-  avatar: string;
-};
+  cep:string;
+  rua:string;
+  numero:string;
+  bairro:string;
+}
 type UserContextProps = {
-  user: UserProps | undefined;
-  name: string;
-  setName: (arg:string)=>void;
-  cep: string;
-  setCep: (arg:string)=>void;
-  rua: string;
-  setRua: (arg:string)=>void;
-  numero: string;
-  setNumero: (arg:string)=>void;
-  bairro: string;
-  setBairro: (arg:string)=>void;
+  setAddress: (arg:AddressProps)=>void;
+  handleInput: (pointer:string,data:string)=>void;
+  address: AddressProps;
   hasFailed: boolean;
   handleSendOrder: (event:FormEvent)=>void;
-  signInWithGoogle: ()=>void;
 };
 type CepProps = {
   street: string;
@@ -37,119 +31,70 @@ const UserContext = createContext({} as UserContextProps)
 
 function UserContextProvider(props:OrderContextProviderProps){
   const {menu, clearOrder} = useOrder();
-  const [name, setName] = useState('');
-  const [cep, setCep] = useState('');
-  const [rua, setRua] = useState('');
-  const [numero, setNumero] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [user, setUser] = useState<UserProps>();
+ 
+  const { user } = useAuth();
   const [hasFailed, setHasFailed] = useState(false);
+  const [ address, setAddress] = useState({
+    name: '',
+    cep: '',
+    rua: '',
+    numero: '',
+    bairro: ''
+  });
 
   const history = useHistory();
 
-  
-  
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user=>{
-      if(user){
-        const { displayName, photoURL, uid } = user;
+    if(user){
+      const userDataRef = database.ref(`users/${user.id}`)
+      userDataRef.on('value',snap=>{
+        const userData = snap.val();
 
-        if(!displayName || !photoURL){
-          throw new Error('Missing information from Google Account.');
-        }
+        if(!userData) return
 
-        setUser({
-          id: uid,
-          name: displayName,
-          avatar: photoURL
-        });
+        const { cep, rua, numero, bairro }: AddressProps = userData;
+        setAddress(prev=>({...prev,name:user.name,cep,rua,numero,bairro}))
 
-        setName(displayName);
-
-        const userRef = database.ref(`users/${user.uid}`);
-        userRef.once('value',(snap)=>{
-          const data = snap.val();
-          const { bairro, cep, numero, rua }:Record<string,string> = data;
-          setRua(rua);
-          setNumero(numero);
-          setBairro(bairro);
-          setCep(cep);
-        })
-      }
-    })
-
-    return ()=>{
-      unsubscribe();
-    }
-  }, []);
-
-
-
-  async function signInWithGoogle(){
-
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const resultado = await auth.signInWithPopup(provider);
-
-    if(resultado.user){
-
-      const { displayName, photoURL, uid } = resultado.user;
-
-      if(!displayName || !photoURL){
-        throw new Error('Missing information from Google Account.');
-      }
-
-      setUser({
-        id: uid,
-        name: displayName,
-        avatar: photoURL
       })
     }
+  }, [user]);
+
+  
+  function handleInput(pointer:string,data:string){
+    setAddress(prev=>({...prev,[pointer]:data}))
   }
 
   useEffect(() => {
   const getCep = async()=>{
-    if(cep.length === 8 ){
-      const url = `https://brasilapi.com.br/api/cep/v1/${cep}`;
+    if(address.cep.length === 8 ){
+      const url = `https://brasilapi.com.br/api/cep/v1/${address.cep}`;
       const promise = await fetch(url);
       const { street, neighborhood }:CepProps = await promise.json();
 
       if(promise.status===200){
-        street && setRua(street);
-        neighborhood &&  setBairro(neighborhood);
+        setAddress(prev=>({...prev, rua:street, bairro: neighborhood}))
       }
     }
   }
     getCep();
-  }, [cep]);
+  }, [address.cep]);
 
   function handleSendOrder(event:FormEvent){
     event.preventDefault();
+    const {name,cep,rua,numero,bairro} = address;
+    const selectedItens = menu.filter(item=>item.isSelected);
 
-    const selected = menu.filter(item=>item.isSelected);
-
-    if(selected.length < 1) Swal({
-      title:'Sua cestinha está vazia',
-      text: 'Você ainda não escolheu seu prato, deseja ir ao menu?',
-      icon: 'info',
-      buttons: {
-        cancel:{
-          text:'Voltar',
-          value: null,
-          visible: true
-        },
-        confirm:{
-          text: 'Ir para o menu',
-          value: true,
-          
-        }
-      }
-    }).then(res=>res && history.push('/'));
-
-    if(name && rua && numero && bairro && selected.length > 0) {
+    if(selectedItens.length < 1) {
+      Swal('Sua cestinha está vazia','Você ainda não escolheu seu prato, deseja ir ao cardápio?','info',{buttons:['Cancelar','Confirmar']})
+      .then(res=>res && history.push('/'))
+      return
+    }
+    
+    if(name && rua && numero && bairro) {
       
       const orderRef = database.ref('orders');
       orderRef.push({
-        order: selected.map(item=>item.content),
+        order: selectedItens.map(item=>item.content),
         name,
         cep,
         rua,
@@ -161,7 +106,7 @@ function UserContextProvider(props:OrderContextProviderProps){
         Swal('Pedido enviado!','','success');
         history.push('/');
         clearOrder();
-      } 
+      }
 
       if(user){
         const userRef = database.ref(`users/${user?.id}`);
@@ -172,7 +117,6 @@ function UserContextProvider(props:OrderContextProviderProps){
           numero,
           bairro
         });
-
         userRef.key && console.log('Usuário cadastrado!');
         
       }
@@ -184,20 +128,11 @@ function UserContextProvider(props:OrderContextProviderProps){
 
   return(
     <UserContext.Provider value={{
-      user,
-      name,
-      setName,
-      cep,
-      setCep,
-      rua,
-      setRua,
-      numero,
-      setNumero,
-      bairro,
-      setBairro,
+      address,
+      setAddress,
+      handleInput,
       hasFailed,
-      handleSendOrder,
-      signInWithGoogle
+      handleSendOrder
     }}>
       {props.children}
     </UserContext.Provider>

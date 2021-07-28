@@ -1,6 +1,33 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { OrderContextProvider } from './context/OrderContext';
 import { UserContextProvider } from './context/UserContext';
+import { AuthContextProvider } from './context/AuthContext';
+import { Home } from './pages/home';
+import { Cadastro } from './pages/cadastro';
+import './styles/global.scss';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <OrderContextProvider>
+          <AuthContextProvider>
+            <UserContextProvider>
+              <Route path="/" exact component={ Home } />
+              <Route path="/cadastro" component={ Cadastro } />
+            </UserContextProvider>
+          </AuthContextProvider>
+        </OrderContextProvider>
+      </Switch>
+    </BrowserRouter>
+  );
+}
+export default App;
+
+
+/* import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { OrderContextProvider } from './context/OrderContext';
+import { UserContextProvider } from './context/UserContext';
 import { Home } from './pages/home';
 import { Cadastro } from './pages/cadastro';
 import './styles/global.scss';
@@ -21,3 +48,4 @@ function App() {
 }
 
 export default App;
+ */

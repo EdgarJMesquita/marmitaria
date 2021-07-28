@@ -12,12 +12,6 @@ export type MenuProps = {
   menu: OrderProps[];
 };
 
-export type MenuSectionProps = {
-  title: string;
-  foodType: string;
-  menu: OrderProps[];
-};
-
 export type OrderContextProviderProps = {
   children: ReactNode;
 }
