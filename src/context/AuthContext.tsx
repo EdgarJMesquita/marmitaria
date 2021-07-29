@@ -50,10 +50,8 @@ function AuthContextProvider({children}:OrderContextProviderProps){
           name: displayName,
           avatar: photoURL
         });
-
       }
     })
-
     return ()=>{
       unsubscribe();
     }

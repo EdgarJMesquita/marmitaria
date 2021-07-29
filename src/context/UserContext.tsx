@@ -1,23 +1,27 @@
-
+// React Hooks/types
 import { createContext, FormEvent, useEffect, useState } from 'react';
-import { useOrder } from '../hooks/useOrder';
+// Database connection
 import { database } from '../services/firebase';
+// Types
 import { OrderContextProviderProps } from '../types';
 import { useHistory } from 'react-router';
-import Swal from 'sweetalert';
+// Custom Hooks
+import { useOrder } from '../hooks/useOrder';
 import { useAuth } from '../hooks/useAuth';
+// Third party libraries
+import Swal from 'sweetalert';
 
 
 type AddressProps = {
   name: string;
   cep:string;
-  rua:string;
-  numero:string;
-  bairro:string;
+  street:string;
+  number:string;
+  neighborhood:string;
 }
 type UserContextProps = {
   setAddress: (arg:AddressProps)=>void;
-  handleInput: (pointer:string,data:string)=>void;
+  handleInput: (event:FormEvent<HTMLInputElement>)=>void;
   address: AddressProps;
   hasFailed: boolean;
   handleSendOrder: (event:FormEvent)=>void;
@@ -30,58 +34,64 @@ type CepProps = {
 const UserContext = createContext({} as UserContextProps)
 
 function UserContextProvider(props:OrderContextProviderProps){
-  const {menu, clearOrder} = useOrder();
- 
-  const { user } = useAuth();
-  const [hasFailed, setHasFailed] = useState(false);
-  const [ address, setAddress] = useState({
+  const [ address, setAddress] = useState<AddressProps>({
     name: '',
     cep: '',
-    rua: '',
-    numero: '',
-    bairro: ''
+    street: '',
+    number: '',
+    neighborhood: ''
   });
-
+  const [ hasFailed, setHasFailed ] = useState(false);
+  const { user } = useAuth();
+  const { menu, clearOrder } = useOrder();
   const history = useHistory();
 
   useEffect(() => {
     if(user){
       const userDataRef = database.ref(`users/${user.id}`)
-      userDataRef.on('value',snap=>{
-        const userData = snap.val();
+      userDataRef.once('value',snap=>{
+        const userData:AddressProps | undefined = snap.val();
 
-        if(!userData) return
-
-        const { cep, rua, numero, bairro }: AddressProps = userData;
-        setAddress(prev=>({...prev,name:user.name,cep,rua,numero,bairro}))
-
+        if(userData){
+          const { cep, street, number, neighborhood }: AddressProps = userData;
+          setAddress(prevState=>({
+            ...prevState,
+            name: user.name,
+            cep,
+            street,
+            number,
+            neighborhood
+          }))
+          
+        } 
       })
     }
   }, [user]);
 
   
-  function handleInput(pointer:string,data:string){
-    setAddress(prev=>({...prev,[pointer]:data}))
+  function handleInput(event:FormEvent<HTMLInputElement>){
+    const pointer = event.currentTarget.name;
+    const newData = event.currentTarget.value.trim();
+    setAddress(prevState=>({...prevState, [pointer]:newData}))
   }
 
   useEffect(() => {
-  const getCep = async()=>{
-    if(address.cep.length === 8 ){
-      const url = `https://brasilapi.com.br/api/cep/v1/${address.cep}`;
-      const promise = await fetch(url);
-      const { street, neighborhood }:CepProps = await promise.json();
+    (async()=>{
+      if(address.cep.length === 8 ){
+        const url = `https://brasilapi.com.br/api/cep/v1/${address.cep}`;
+        const promise = await fetch(url);
+        const { street, neighborhood }:CepProps = await promise.json();
 
-      if(promise.status===200){
-        setAddress(prev=>({...prev, rua:street, bairro: neighborhood}))
+        if(promise.status===200){
+          setAddress(prevState=>({...prevState, street, neighborhood}))
+        }
       }
-    }
-  }
-    getCep();
+    })();
   }, [address.cep]);
 
   function handleSendOrder(event:FormEvent){
     event.preventDefault();
-    const {name,cep,rua,numero,bairro} = address;
+    const {name, cep, street, number, neighborhood} = address;
     const selectedItens = menu.filter(item=>item.isSelected);
 
     if(selectedItens.length < 1) {
@@ -90,16 +100,16 @@ function UserContextProvider(props:OrderContextProviderProps){
       return
     }
     
-    if(name && rua && numero && bairro) {
+    if(name && street && number && neighborhood) {
       
       const orderRef = database.ref('orders');
       orderRef.push({
         order: selectedItens.map(item=>item.content),
         name,
         cep,
-        rua,
-        numero,
-        bairro
+        street,
+        number,
+        neighborhood
       });
 
       if(orderRef.key){
@@ -113,9 +123,9 @@ function UserContextProvider(props:OrderContextProviderProps){
         userRef.update({
           id: user?.id,
           cep,
-          rua,
-          numero,
-          bairro
+          street,
+          number,
+          neighborhood
         });
         userRef.key && console.log('Usuário cadastrado!');
         
@@ -140,3 +150,152 @@ function UserContextProvider(props:OrderContextProviderProps){
 }
 
 export { UserContext, UserContextProvider} 
+
+/* 
+import { createContext, FormEvent, useEffect, useState } from 'react';
+import { useOrder } from '../hooks/useOrder';
+import { database } from '../services/firebase';
+import { OrderContextProviderProps } from '../types';
+import { useHistory } from 'react-router';
+import Swal from 'sweetalert';
+import { useAuth } from '../hooks/useAuth';
+
+
+type AddressProps = {
+  name: string;
+  cep:string;
+  street:string;
+  number:string;
+  neighborhood:string;
+}
+type UserContextProps = {
+  setAddress: (arg:AddressProps)=>void;
+  handleInput: (event:FormEvent<HTMLInputElement>)=>void;
+  address: AddressProps;
+  hasFailed: boolean;
+  handleSendOrder: (event:FormEvent)=>void;
+};
+type CepProps = {
+  street: string;
+  neighborhood: string;
+};
+
+const UserContext = createContext({} as UserContextProps)
+
+function UserContextProvider(props:OrderContextProviderProps){
+  const [ address, setAddress] = useState<AddressProps>({
+    name: '',
+    cep: '',
+    street: '',
+    number: '',
+    neighborhood: ''
+  });
+  const [hasFailed, setHasFailed] = useState(false);
+  const { user } = useAuth();
+  const {menu, clearOrder} = useOrder();
+  const history = useHistory();
+
+  useEffect(() => {
+    if(user){
+      const userDataRef = database.ref(`users/${user.id}`)
+      userDataRef.on('value',snap=>{
+        const userData:AddressProps | undefined = snap.val();
+
+        if(userData){
+          const { cep, street, number, neighborhood }: AddressProps = userData;
+          setAddress(prevState=>({
+            ...prevState,
+            name: user.name,
+            cep,
+            street,
+            number,
+            neighborhood
+          }))
+          
+        } 
+      })
+    }
+  }, [user]);
+
+  
+  function handleInput(event:FormEvent<HTMLInputElement>){
+    const pointer = event.currentTarget.name;
+    const newData = event.currentTarget.value.trim();
+    setAddress(prevState=>({...prevState, [pointer]:newData}))
+  }
+
+  useEffect(() => {
+    (async()=>{
+      if(address.cep.length === 8 ){
+        const url = `https://brasilapi.com.br/api/cep/v1/${address.cep}`;
+        const promise = await fetch(url);
+        const { street, neighborhood }:CepProps = await promise.json();
+
+        if(promise.status===200){
+          setAddress(prevState=>({...prevState, street, neighborhood}))
+        }
+      }
+    })();
+  }, [address.cep]);
+
+  function handleSendOrder(event:FormEvent){
+    event.preventDefault();
+    const {name, cep, street, number, neighborhood} = address;
+    const selectedItens = menu.filter(item=>item.isSelected);
+
+    if(selectedItens.length < 1) {
+      Swal('Sua cestinha está vazia','Você ainda não escolheu seu prato, deseja ir ao cardápio?','info',{buttons:['Cancelar','Confirmar']})
+      .then(res=>res && history.push('/'))
+      return
+    }
+    
+    if(name && street && number && neighborhood) {
+      
+      const orderRef = database.ref('orders');
+      orderRef.push({
+        order: selectedItens.map(item=>item.content),
+        name,
+        cep,
+        street,
+        number,
+        neighborhood
+      });
+
+      if(orderRef.key){
+        Swal('Pedido enviado!','','success');
+        history.push('/');
+        clearOrder();
+      }
+
+      if(user){
+        const userRef = database.ref(`users/${user?.id}`);
+        userRef.update({
+          id: user?.id,
+          cep,
+          street,
+          number,
+          neighborhood
+        });
+        userRef.key && console.log('Usuário cadastrado!');
+        
+      }
+
+    }else{
+      setHasFailed(true);
+    }
+  }
+
+  return(
+    <UserContext.Provider value={{
+      address,
+      setAddress,
+      handleInput,
+      hasFailed,
+      handleSendOrder
+    }}>
+      {props.children}
+    </UserContext.Provider>
+  )
+}
+
+export { UserContext, UserContextProvider}  */

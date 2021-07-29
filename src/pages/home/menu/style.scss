@@ -1,7 +1,10 @@
 
 .menu {
   padding: 1rem;
-
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
   section {
     margin-bottom: 2rem;
 
@@ -12,6 +15,7 @@
   } 
 
   .btn-con {
+    
     width: 100%;
     display: flex;
     justify-content: center;

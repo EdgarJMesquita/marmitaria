@@ -1,6 +1,3 @@
-
-
-
 import { useUser } from '../../../hooks/useUser';
 import './style.scss';
 
@@ -16,23 +13,23 @@ export function UserForm(){
   return(
     <form onSubmit={handleSendOrder}>
       <div>
-        <input onChange={(e)=>handleInput('name',e.target.value)} value={address.name} type="text" placeholder="Digite seu nome" />
+        <input onChange={handleInput} value={address.name} name="name" type="text" placeholder="Digite seu nome" />
         {address.name.length < 3 && hasFailed && <span>Digite seu nome</span>}
       </div>
       <div>
-        <input onChange={(e)=>handleInput('cep',e.target.value)} value={address.cep} type="text" placeholder="00000-00" />
+        <input onChange={handleInput} value={address.cep} name="cep" type="text" placeholder="00000-00" />
       </div>
       <div>
-        <input onChange={(e)=>handleInput('rua',e.target.value)} value={address.rua} type="text" placeholder="Rua" />
-        {address.rua.length < 3 && hasFailed && <span>Digite a rua</span>}
+        <input onChange={handleInput} value={address.street} name="street" type="text" placeholder="Rua" />
+        {address.street.length < 3 && hasFailed && <span>Digite a rua</span>}
       </div>
       <div>
-        <input onChange={(e)=>handleInput('numero',e.target.value)} value={address.numero} type="text" placeholder="Número" />
-        {address.numero.length < 1 && hasFailed && <span>Digite o número</span>}
+        <input onChange={handleInput} value={address.number} name="number" type="text" placeholder="Número" />
+        {address.number.length < 1 && hasFailed && <span>Digite o número</span>}
       </div>
       <div>
-        <input onChange={(e)=>handleInput('bairro',e.target.value)} value={address.bairro} type="text" placeholder="Bairro" />
-        {address.bairro.length < 3 && hasFailed && <span>Digite o bairro</span>}
+        <input onChange={handleInput} value={address.neighborhood} name="neighborhood" type="text" placeholder="Bairro" />
+        {address.neighborhood.length < 3 && hasFailed && <span>Digite o bairro</span>}
       </div>
       <button type="submit">
         Finalizar pedido
