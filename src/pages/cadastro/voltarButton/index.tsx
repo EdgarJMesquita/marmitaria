@@ -7,7 +7,7 @@ export function Voltar(){
   return(
     <div onClick={()=>history.push('/')} className="voltar">
       <img src={backArrow} alt="voltar"/>
-      <span>Voltar</span>
+     {/*  <span>Voltar</span> */}
     </div>
   )
 }

@@ -10,14 +10,14 @@ import { useOrder } from '../../hooks/useOrder';
 import { useAuth } from '../../hooks/useAuth';
 
 export function Cadastro(){
-  const { user } = useAuth();
+  const { userAuth } = useAuth();
   const { menu } = useOrder();
  
   return(
     <>
-      {!user? 
+      {!userAuth? 
         <SignIn /> : 
-        <Signed name={user.name} avatar={user.avatar}/>
+        <Signed name={userAuth.name} avatar={userAuth.avatar}/>
       }
       <UserForm />
       <Voltar />

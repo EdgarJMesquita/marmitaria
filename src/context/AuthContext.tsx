@@ -10,14 +10,14 @@ type UserProps = {
 } | undefined;
 
 type AuthContextProps = {
-  user: UserProps;
+  userAuth: UserProps;
   signInWithGoogle: ()=>void;
 }
 
 const AuthContext = createContext({} as AuthContextProps);
 
 function AuthContextProvider({children}:OrderContextProviderProps){
-  const [ user, setUser ] = useState<UserProps>();
+  const [ userAuth, setUserAuth ] = useState<UserProps>();
 
   async function signInWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -28,7 +28,7 @@ function AuthContextProvider({children}:OrderContextProviderProps){
       if(!displayName || !photoURL){
         throw new Error('Missing information from Google Account.');
       }
-      setUser({
+      setUserAuth({
         id: uid,
         name: displayName,
         avatar: photoURL
@@ -45,7 +45,7 @@ function AuthContextProvider({children}:OrderContextProviderProps){
           throw new Error('Missing information from Google Account.');
         }
 
-        setUser({
+        setUserAuth({
           id: uid,
           name: displayName,
           avatar: photoURL
@@ -59,7 +59,7 @@ function AuthContextProvider({children}:OrderContextProviderProps){
   
   return(
     <AuthContext.Provider value={{
-      user,
+      userAuth,
       signInWithGoogle
     }}>
     {children}
