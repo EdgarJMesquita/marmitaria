@@ -1,9 +1,14 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import { OrderContextProvider } from './context/OrderContext';
 import { UserContextProvider } from './context/UserContext';
 import { AuthContextProvider } from './context/AuthContext';
-import { Home } from './pages/home';
+
+import { Home } from './pages/menu';
 import { Cadastro } from './pages/cadastro';
+import { NewOrders } from './pages/admin/newOrders';
+import { Shipping } from './pages/admin/shipping';
+
 import './styles/global.scss';
 
 function App() {
@@ -15,6 +20,8 @@ function App() {
             <UserContextProvider>
               <Route path="/" exact component={ Home } />
               <Route path="/cadastro" component={ Cadastro } />
+              <Route path="/admin/shipping" component={Shipping}/>
+              <Route path="/admin/new-orders" component={NewOrders}/>
             </UserContextProvider>
           </AuthContextProvider>
         </OrderContextProvider>

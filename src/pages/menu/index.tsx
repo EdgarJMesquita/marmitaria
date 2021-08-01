@@ -10,7 +10,7 @@ export function Home(){
   return(
     <>
       <Menu menu={menu}/>
-      <Basket order={menu}/>
+      <Basket />
     </>
   )
 }

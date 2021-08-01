@@ -1,15 +1,13 @@
 import { BasketItem } from './basketItem';
-import { OrderProps } from '../../types';
 import './styles.scss';
+import { useOrder } from '../../hooks/useOrder';
 
-type BananaProps = {
-  order: OrderProps[];
-}
 
-export function Basket({order}:BananaProps){
+export function Basket(){
+  const { menu } = useOrder();
   return(
     <ul>
-      { order.map(item=>{
+      { menu.map(item=>{
           return item.isSelected && <BasketItem key={item.id} item={item}/>
         })
       }
