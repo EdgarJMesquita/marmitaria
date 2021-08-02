@@ -1,5 +1,13 @@
+import { Footer } from "../../../components/footer";
+import { useAdmin } from "../../../hooks/useAdmin";
+import { Orders } from "../orders";
+
 export function Shipping(){
+  const { shippingOrders } = useAdmin();
   return(
-    <h1>Shipping</h1>
+    <>
+      <Orders title="Pedidos prontos para entrega" orders={shippingOrders}/>
+      <Footer />
+    </>
   )
 }

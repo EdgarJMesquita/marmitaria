@@ -1,12 +1,12 @@
 import { BasketItem } from './basketItem';
-import './styles.scss';
 import { useOrder } from '../../hooks/useOrder';
+import './styles.scss';
 
 
 export function Basket(){
   const { menu } = useOrder();
   return(
-    <ul>
+    <ul className="basket">
       { menu.map(item=>{
           return item.isSelected && <BasketItem key={item.id} item={item}/>
         })

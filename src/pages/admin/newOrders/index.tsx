@@ -1,14 +1,12 @@
 import { Footer } from '../../../components/footer';
 import { useAdmin } from '../../../hooks/useAdmin';
+import { Orders } from '../orders';
 
 export function NewOrders(){
-  const { orders } = useAdmin();
-  function teste(){
-    console.log(orders);
-  }
+  const { newOrders } = useAdmin();
   return(
     <>
-      <button onClick={teste}>My Awesome Button to get new Orders</button>
+      <Orders title="Novos pedidos" orders={newOrders}/>
       <Footer />
     </>
   )
