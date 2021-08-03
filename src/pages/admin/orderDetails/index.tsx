@@ -20,6 +20,7 @@ export function OrderDetails({match}:ParamsProps){
   const { params:{orderId}} = match;  
   const { getOrderDetails, setOrderToShipping, endOrder } = useAdmin();
   const currentOrder = getOrderDetails(orderId); 
+  const isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1;
 
   return(
     <>
@@ -38,8 +39,8 @@ export function OrderDetails({match}:ParamsProps){
       <ul>
         <li>{currentOrder?.name}</li>
         <li>
-          {currentOrder?.telephone} 
-          <a href={`https://api.whatsapp.com/send?phone=${currentOrder?.telephone}`} rel="noreferrer" target="_blank">
+          <a href={`https://api.whatsapp.com/send?phone=55${currentOrder?.telephone}`} rel="noreferrer" target="_blank">
+            {currentOrder?.telephone} 
             <img src={whatsAppIcon} alt="chamar no whatsapp" />
           </a>
         </li>
@@ -47,16 +48,18 @@ export function OrderDetails({match}:ParamsProps){
         <li>{currentOrder?.street}</li>
         <li>{currentOrder?.number}</li>
         <li>{currentOrder?.neighborhood}</li>
-      </ul>
-      
-      <ul>
+        
         <li>
-          Abrir Google Maps
-          <a href="geo:0,0?q=2010+Rua+Olyntho+Arruda+Sapiranga-Coité">
+          <a href={isAndroid? 
+                    `geo:0,0?q=${currentOrder?.encodedAddress}` : 
+                    `https://www.google.com/maps/search/${currentOrder?.encodedAddress}`
+                  }>
+            Abrir Maps
             <img src={googleMapsIcon} alt="google map" />
           </a>
         </li>
       </ul>
+      
       {currentOrder?.status==='new'?(
         <button onClick={()=>setOrderToShipping(orderId)}>Pedido pronto para entrega</button>
         ):(

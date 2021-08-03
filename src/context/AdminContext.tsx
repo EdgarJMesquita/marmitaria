@@ -7,6 +7,7 @@ import { newNotification } from '../utils/newNotification';
 import { database } from '../services/firebase';
 // Types
 import { ChildrenProps } from '../types/index';
+import { encodeAddressURL } from '../utils/encodeAddressURL';
 
 type AdminOrdersProps = {
   id: string;
@@ -51,9 +52,9 @@ function AdminContextProvider({children}:ChildrenProps){
     ordersRef.on('value',snap=>{
       const data:FirebaseOrders = snap.val()?? {};
       const convertedData:AdminOrdersProps[] = Object.entries(data)?.map(([id,value])=>{
-        const { number, street, neighborhood} = value;
-        const encodedAddress = `geo:0,0?q=${number}+${street.split(' ').join('+')}+${neighborhood}`;
-        console.log(encodedAddress)
+        const { cep, number, street, neighborhood} = value;
+        const encodedAddress = `${number}%2C${encodeAddressURL(street)}%2C${encodeAddressURL(neighborhood)}%2C${cep}`;
+        console.log(encodedAddress);
         return{
           ...value,
           encodedAddress,

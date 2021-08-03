@@ -17,6 +17,7 @@
   }
 
   li {
+    height: 3.625rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -25,10 +26,20 @@
     color: #4f4f4f;
     padding: 1rem;
    // border-bottom: 1px dotted #d3d3d8;
+
+    a {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: inherit;
+    } 
+
     img {
       width: 2rem;
       height: 2rem;
     }
+
   }
 
   li + li {

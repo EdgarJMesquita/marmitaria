@@ -10,7 +10,7 @@ footer {
   justify-content: space-around;
   align-items: center;
 
-  img {
+  /* img {
     width: 2rem;
     height: auto;
   }
@@ -18,15 +18,20 @@ footer {
   img:nth-child(2) {
     width: 2.2rem;
 
-  }
+  } */
 
   div {
     position: relative;
-    
+
+      img {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
       span {
         position: absolute;
-        bottom: 1rem;
-        right: 0;
+        bottom: 1.5rem;
+        left: 1.5rem;
         background-color: #FA8938;
         color: #fff;
         font-size: 0.75rem;
@@ -38,7 +43,5 @@ footer {
         justify-content: center;
         align-items: center;
       }
-    }
-  
-
+  }
 }

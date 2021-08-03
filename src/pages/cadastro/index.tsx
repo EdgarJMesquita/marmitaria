@@ -15,8 +15,9 @@ export function Cadastro(){
   return(
     <>
       {!userAuth? <SignIn /> : <Signed />}
-      <a href="geo:0,0?q=2010+Olytho+Arruda+Sapiranga">click</a>
+      <a href="geo:0,0?q=2010%2CRua+Olyntho+Arruda%2CSapiranga+Coité%2C60833322" target="_blank" rel="noreferrer">click</a>
       <a href="http://maps.google.com/maps?q=2010+olyntho+arruda+sapiranga">click</a>
+      <a href="https://api.whatsapp.com/send?phone=5585991871212">Whats</a>
       <Form />
       <GoBackButton />
       <Basket />
