@@ -3,7 +3,7 @@ import { createContext, FormEvent, useEffect, useState } from 'react';
 // Database connection
 import { database } from '../services/firebase';
 // Types
-import { OrderContextProviderProps } from '../types';
+import { ChildrenProps } from '../types';
 import { useHistory } from 'react-router';
 // Custom Hooks
 import { useOrder } from '../hooks/useOrder';
@@ -33,7 +33,7 @@ type CepProps = {
 
 const UserContext = createContext({} as UserContextProps)
 
-function UserContextProvider(props:OrderContextProviderProps){
+function UserContextProvider(props:ChildrenProps){
   const [ user, setUser] = useState<UserProps>({
     name: '',
     telephone: '',
@@ -64,24 +64,6 @@ function UserContextProvider(props:OrderContextProviderProps){
     setUser(prevState=>({...prevState, [name]: value}));
   }
 
-  /* useEffect(() => {
-    (async()=>{
-      if(user.cep.length === 8 ){
-        const url = `https://brasilapi.com.br/api/cep/v1/${user.cep}`;
-        const promise = await fetch(url);
-        const { street, neighborhood }:CepProps = await promise.json();
-
-        if(promise.status===200){
-          setUser(prevState=>({
-            ...prevState, 
-              street,
-              neighborhood  
-          }))
-        }
-      }
-    })();
-  }, [user.cep]); */
-
   async function getCep(){
     if(user.cep.length === 8){
       const url = `https://brasilapi.com.br/api/cep/v1/${user.cep}`;
@@ -105,7 +87,7 @@ function UserContextProvider(props:OrderContextProviderProps){
     }
   }
 
-  function getOrder(){
+  function validateOrder(){
     const order = menu.filter(item=>item.isSelected).map(item=>item.content);
 
     if(order.length < 1) {
@@ -151,10 +133,11 @@ function UserContextProvider(props:OrderContextProviderProps){
   function handleSendOrder(event:FormEvent){
     event.preventDefault();
 
-    const order = getOrder();
+    const order = validateOrder();
     
     if(order && checkUserInput()) {
       sendOrder(order);
+      
     }else{
       setHasFailed(true);
     }

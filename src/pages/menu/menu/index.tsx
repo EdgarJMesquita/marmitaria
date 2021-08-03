@@ -1,9 +1,12 @@
 import { MenuSection } from '../menuSection';
-import { MenuProps } from '../../../types';
+import { OrderProps } from '../../../types';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert';
 import './style.scss';
-//import { Button } from '../../../components/button';
+
+export type MenuProps = {
+  menu: OrderProps[];
+};
 
 export function Menu({menu}:MenuProps){
   const history = useHistory();

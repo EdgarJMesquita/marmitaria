@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { firebase, auth } from '../services/firebase';
-import { OrderContextProviderProps } from '../types';
+import { ChildrenProps } from '../types';
 
 
 type UserProps = {
@@ -16,7 +16,7 @@ type AuthContextProps = {
 
 const AuthContext = createContext({} as AuthContextProps);
 
-function AuthContextProvider({children}:OrderContextProviderProps){
+function AuthContextProvider({children}:ChildrenProps){
   const [ userAuth, setUserAuth ] = useState<UserProps>();
 
   async function signInWithGoogle(){

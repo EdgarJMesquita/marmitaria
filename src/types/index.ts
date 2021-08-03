@@ -8,16 +8,6 @@ export type OrderProps = {
   type: string;
 };
 
-export type MenuProps = {
-  menu: OrderProps[];
-};
-
-export type OrderContextProviderProps = {
+export type ChildrenProps = {
   children: ReactNode;
-}
-
-export type ContextProps = {
-  handleBasket: (id:string)=>void;
-  clearOrder: ()=>void;
-  menu: OrderProps[];
 }

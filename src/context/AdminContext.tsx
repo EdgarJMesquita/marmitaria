@@ -1,13 +1,14 @@
-
-import { createContext, ReactNode, useEffect, useState } from 'react';
+// React Hooks
+import { createContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+// Utils
+import { newNotification } from '../utils/newNotification';
+// Database Connextion
 import { database } from '../services/firebase';
+// Types
+import { ChildrenProps } from '../types/index';
 
-
-type ContextProps = {
-  children: ReactNode;
-}
-type OrdersProps = {
+type AdminOrdersProps = {
   id: string;
   name: string;
   telephone: string;
@@ -17,44 +18,54 @@ type OrdersProps = {
   neighborhood: string;
   order: string[];
   status: 'new' | 'shipping';
+  encodedAddress: string;
 }
 type AdminContextProps = {
-  allOrders: OrdersProps[] | undefined;
-  newOrders: OrdersProps[] | undefined;
-  shippingOrders: OrdersProps[] | undefined;
-  getOrderDetails:(id:string)=>OrdersProps | undefined;
+  newOrders: AdminOrdersProps[] | undefined;
+  shippingOrders: AdminOrdersProps[] | undefined;
+  getOrderDetails:(id:string)=>AdminOrdersProps | undefined;
   setOrderToShipping:(id:string)=>void;
   endOrder:(id:string)=>void;
 }
 
-type FirebaseOrders = Record<string,OrdersProps>;
+type FirebaseOrders = Record<string,AdminOrdersProps>;
 
 const AdminContext = createContext({} as AdminContextProps);
 
 
-function AdminContextProvider({children}:ContextProps){
-  const history = useHistory();
-  const [ allOrders, setAllOrders] = useState<OrdersProps[]>();
-  const [ newOrders, setNewOrders ] = useState<OrdersProps[]>();
-  const [ shippingOrders, setShippingOrders ] = useState<OrdersProps[]>();
-
+function AdminContextProvider({children}:ChildrenProps){
   
+  const history = useHistory();
+  const [ newOrders, setNewOrders ] = useState<AdminOrdersProps[]>();
+  const [ shippingOrders, setShippingOrders ] = useState<AdminOrdersProps[]>();
+
+  useEffect(()=>{
+    if(newOrders && newOrders.length !== 0){
+      newNotification(newOrders.length);
+    }
+  }, [newOrders])
+
 
   useEffect(() => {
     const ordersRef = database.ref('orders');
     ordersRef.on('value',snap=>{
       const data:FirebaseOrders = snap.val()?? {};
-      const convertedData:OrdersProps[] = Object.entries(data)?.map(([id,value])=>{
+      const convertedData:AdminOrdersProps[] = Object.entries(data)?.map(([id,value])=>{
+        const { number, street, neighborhood} = value;
+        const encodedAddress = `geo:0,0?q=${number}+${street.split(' ').join('+')}+${neighborhood}`;
+        console.log(encodedAddress)
         return{
           ...value,
+          encodedAddress,
           id
         }
       });
+      
       const _newOrders = convertedData.filter(order=>order.status==='new');
       const _shippingOrders = convertedData.filter(order=>order.status==='shipping');
-      setAllOrders(convertedData);
       setNewOrders(_newOrders);                                                                                                                                                                                                                                                                                       
-      setShippingOrders(_shippingOrders);                                                                                                                                                                                                                                                                                       
+      setShippingOrders(_shippingOrders); 
+
       console.log(convertedData);                                                                                                                                                                                                                                                                                                                                                                                         
     })
     return () => {
@@ -63,8 +74,11 @@ function AdminContextProvider({children}:ContextProps){
   }, [])
 
   function getOrderDetails(id:string){
-    const currentOrder = allOrders?.find(order=>order.id===id);
-    return currentOrder;
+    if(newOrders && shippingOrders){
+      const allOrders = [...newOrders,...shippingOrders];
+      const currentOrder = allOrders.find(order=>order.id === id);
+      return currentOrder;
+    }
   }
 
   function setOrderToShipping(id:string){
@@ -83,7 +97,6 @@ function AdminContextProvider({children}:ContextProps){
 
   return(
     <AdminContext.Provider value={{
-      allOrders,
       newOrders,
       shippingOrders,
       getOrderDetails,

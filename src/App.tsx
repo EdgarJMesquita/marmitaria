@@ -7,7 +7,7 @@ import { AdminContextProvider } from './context/AdminContext';
 
 import { Home } from './pages/menu';
 import { Cadastro } from './pages/cadastro';
-import { NewOrders } from './pages/admin/newOrders';
+import { NewOrders } from './pages/admin/new-orders';
 import { Shipping } from './pages/admin/shipping';
 import { OrderDetails } from './pages/admin/orderDetails';
 

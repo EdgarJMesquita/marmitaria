@@ -15,6 +15,8 @@ export function Cadastro(){
   return(
     <>
       {!userAuth? <SignIn /> : <Signed />}
+      <a href="geo:0,0?q=2010+Olytho+Arruda+Sapiranga">click</a>
+      <a href="http://maps.google.com/maps?q=2010+olyntho+arruda+sapiranga">click</a>
       <Form />
       <GoBackButton />
       <Basket />

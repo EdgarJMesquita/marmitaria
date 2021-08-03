@@ -2,11 +2,17 @@ import { createContext, useState, useEffect } from 'react';
 //services
 import { database } from '../services/firebase';
 // types
-import { OrderProps, OrderContextProviderProps, ContextProps } from '../types';
+import { ChildrenProps, OrderProps } from '../types';
+
+type ContextProps = {
+  handleBasket: (id:string)=>void;
+  clearOrder: ()=>void;
+  menu: OrderProps[];
+}
 
 const OrderContext = createContext({} as ContextProps);
 
-function OrderContextProvider(props:OrderContextProviderProps){
+function OrderContextProvider({children}:ChildrenProps){
   const [ menu, setMenu] = useState<OrderProps[]>([]);
 
   useEffect(()=>{
@@ -34,7 +40,7 @@ function OrderContextProvider(props:OrderContextProviderProps){
       handleBasket,
       clearOrder
     }}>
-      {props.children}
+      {children}
     </OrderContext.Provider>
   );
 }

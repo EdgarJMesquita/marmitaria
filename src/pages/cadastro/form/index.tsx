@@ -18,7 +18,7 @@ export function Form(){
           {user.name.length < 3 && hasFailed && <span>Digite seu nome</span>}
       </div>
       <div>
-          <input onChange={handleInput} value={user.telephone} name="telephone" type="text" placeholder="(00) 0000-0000" />
+          <input onChange={handleInput} value={user.telephone} name="telephone" type="tel" placeholder="(00) 0000-0000" />
           {user.telephone.length < 3 && hasFailed && <span>Digite seu número telefone</span>}
       </div>
       <div className="cep-input-container">
