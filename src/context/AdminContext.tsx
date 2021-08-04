@@ -3,11 +3,11 @@ import { createContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // Utils
 import { newNotification } from '../utils/newNotification';
-// Database Connextion
+// Database Connection
 import { database } from '../services/firebase';
 // Types
 import { ChildrenProps } from '../types/index';
-import { encodeAddressURL } from '../utils/encodeAddressURL';
+import { conveteAddressToURL } from '../utils/conveteAddressToURL';
 
 type AdminOrdersProps = {
   id: string;
@@ -48,27 +48,27 @@ function AdminContextProvider({children}:ChildrenProps){
 
 
   useEffect(() => {
+
     const ordersRef = database.ref('orders');
+
     ordersRef.on('value',snap=>{
       const data:FirebaseOrders = snap.val()?? {};
-      const convertedData:AdminOrdersProps[] = Object.entries(data)?.map(([id,value])=>{
-        const { cep, number, street, neighborhood} = value;
-        const encodedAddress = `${number}%2C${encodeAddressURL(street)}%2C${encodeAddressURL(neighborhood)}%2C${cep}`;
-        console.log(encodedAddress);
+      const arrayOfOrders:AdminOrdersProps[] = Object.entries(data)?.map(([id,value])=>{
         return{
           ...value,
-          encodedAddress,
+          encodedAddress: conveteAddressToURL(value),
           id
         }
       });
       
-      const _newOrders = convertedData.filter(order=>order.status==='new');
-      const _shippingOrders = convertedData.filter(order=>order.status==='shipping');
+      const _newOrders = arrayOfOrders.filter(({status})=>status==='new');
+      const _shippingOrders = arrayOfOrders.filter(({status})=>status==='shipping');
       setNewOrders(_newOrders);                                                                                                                                                                                                                                                                                       
       setShippingOrders(_shippingOrders); 
 
-      console.log(convertedData);                                                                                                                                                                                                                                                                                                                                                                                         
+      console.log(arrayOfOrders);                                                                                                                                                                                                                                                                                                                                                                                         
     })
+
     return () => {
       ordersRef.off(); 
     }

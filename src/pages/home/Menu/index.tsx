@@ -1,4 +1,4 @@
-import { MenuSection } from '../menuSection';
+import { MenuSection } from '../MenuSection';
 import { OrderProps } from '../../../types';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert';
@@ -28,6 +28,6 @@ export function Menu({menu}:MenuProps){
           <button onClick={checkOrder} >Continuar</button>
         </div>
         {/* <Button clickFunction={checkOrder} text="Continuar" type="button"/> */}
-      </div>
+    </div>
   )
 }

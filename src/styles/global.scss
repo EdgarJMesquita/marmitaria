@@ -12,3 +12,44 @@ div, p, span, input, button, ul, li {
   margin: 0;
   box-sizing: border-box;
 }
+
+@media screen and (min-width: 500px){
+  .responsive{
+    display: flex;
+    justify-content: center;
+   
+    > div {
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #d3d3d8;
+      margin-top: 5rem;
+      min-height: 30rem;
+      width: 30rem;
+      box-shadow: 0 10px 10px rgba(0, 0, 0,0.1);
+    }
+
+    .basket {
+      position: absolute;
+      top: 0;
+      height: 4rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    footer {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      
+      justify-content: center;
+      gap: 7rem;
+    }
+    
+    form {
+      button {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

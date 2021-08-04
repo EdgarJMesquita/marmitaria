@@ -1,12 +1,15 @@
-import { Footer } from '../../../components/footer';
+import { Container } from '../../../components/Container';
+import { Footer } from '../../../components/Footer';
 import { useAdmin } from '../../../hooks/useAdmin';
-import { OrdersList } from '../components/orders';
+import { OrdersList } from '../components/Orders';
 
 export function Shipping(){
   const { shippingOrders } = useAdmin();
   return(
     <>
-      <OrdersList title="Prontos para entrega" orders={shippingOrders} />
+      <Container classname="">
+        <OrdersList title="Prontos para entrega" orders={shippingOrders} />
+      </Container>
       <Footer />
     </>
   )

@@ -11,7 +11,7 @@ export function MenuItem({item}:ItemProps){
 const { handleBasket } = useOrder();
   return(
     <div className="menu-item" onClick={()=>handleBasket(item.id)}>
-      <img src={item.image} alt={item.id} />
+      <img src={item.image} alt={item.content} />
       {item.isSelected && <img className="selected" src={selectedIcon} alt="checked" />}
       <p>{item.content}</p>
     </div>

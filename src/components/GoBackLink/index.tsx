@@ -1,11 +1,11 @@
 import { useHistory } from "react-router-dom"
-import backArrow from '../../../assets/images/backArrow.svg';
+import backArrow from '../../assets/images/backArrow.svg';
 import './style.scss';
 
-export function GoBackButton(){
+export function GoBackLink(){
   const history = useHistory();
   return(
-    <div onClick={()=>history.push('/')} className="voltar">
+    <div onClick={()=>history.goBack()} className="voltar">
       <img src={backArrow} alt="voltar"/>
     </div>
   )
