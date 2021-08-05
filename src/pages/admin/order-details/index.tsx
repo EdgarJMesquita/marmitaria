@@ -2,12 +2,12 @@
 import { Footer } from '../../../components/Footer';
 import { OrderItens } from './components/OrderItens';
 import { UserAddress } from './components/UserAddress';
-// Customs Hooks
-import { useAdmin } from '../../../hooks/useAdmin';
-
 import { Container } from '../../../components/Container';
 import { Button } from './components/Button';
 import { GoBackLink } from '../../../components/GoBackLink';
+// Customs Hooks
+import { useAdmin } from '../../../hooks/useAdmin';
+
 import './style.scss';
 
 type ParamsProps = {

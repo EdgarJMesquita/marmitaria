@@ -1,8 +1,9 @@
 
+
 footer {
   position: fixed;
   bottom: 0;
-  height: 4rem;
+  height: 4.5rem;
   width: 100%;
   background-color: #FFE194;
 
@@ -10,38 +11,43 @@ footer {
   justify-content: space-around;
   align-items: center;
 
-  /* img {
-    width: 2rem;
-    height: auto;
-  }
-
-  img:nth-child(2) {
-    width: 2.2rem;
-
-  } */
 
   div {
     position: relative;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > div {
 
       img {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.4rem;
+        height: 2.4rem;
       }
 
       span {
         position: absolute;
-        bottom: 1.5rem;
-        left: 1.5rem;
+        bottom: 1.4rem;
+        left: 1.4rem;
         background-color: #FA8938;
         color: #fff;
         font-size: 0.75rem;
         width: 1.2rem;
         height: 1.2rem;
         border-radius: 50%;
-
         display: flex;
         justify-content: center;
         align-items: center;
       }
+    }
+
+
+      p {
+        color: #ffffff;
+        font-size: 0.8rem;
+      }
+
   }
 }

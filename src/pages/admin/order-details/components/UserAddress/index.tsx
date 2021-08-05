@@ -17,15 +17,16 @@ type UserAddressProps = {
 
 export function UserAddress({address}:UserAddressProps){
   const isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1;
+
   return(
     <>
       <h3>Endereço</h3>
       <ul>
         <li>{address?.name}</li>
         <li>
-          <a href={`https://api.whatsapp.com/send?phone=55${address?.telephone}`} rel="noreferrer" target="_blank">
+          <a href={`https://api.whatsapp.com/send?phone=55${address?.telephone}`} rel="noreferrer" target="_blank" title="Abrir com WhatsApp">
             {address?.telephone} 
-            <img src={whatsAppIcon} alt="chamar no whatsapp" />
+            <img src={whatsAppIcon} alt="chamar no whatsapp"/>
           </a>
         </li>
         <li>{address?.cep}</li>
@@ -36,9 +37,9 @@ export function UserAddress({address}:UserAddressProps){
           <a href={isAndroid? 
                     `geo:0,0?q=${address?.encodedAddress}` : 
                     `https://www.google.com/maps/search/${address?.encodedAddress}`
-                  } target="_blank" rel="noreferrer">
-            Abrir Maps
-            <img src={googleMapsIcon} alt="google map" />
+                  } target="_blank" rel="noreferrer" title="Abrir no mapa">
+            Abrir endereço no mapa
+            <img src={googleMapsIcon} alt="google map"/>
           </a>
         </li>
       </ul>

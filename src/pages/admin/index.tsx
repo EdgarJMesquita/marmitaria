@@ -6,21 +6,24 @@ import { useHistory } from "react-router-dom";
 import { database } from "../../services/firebase";
 
 export function Login(){
-  const { signInWithGoogle } = useAuth();
+  const { userAuth, signInWithGoogle } = useAuth();
   const history = useHistory();
 
   useEffect(()=>{
-    database.ref('checkPermission/uga').update({uga:'buga'},(err)=>{
-      if(!err){
-        history.push('/admin/new-orders');
-      }else{
-        history.push('/');
-        console.log(err);
-      }
+    if(userAuth){
+      database.ref('checkPermission/uga').update({uga:'buga'},(err)=>{
+        if(!err){
+          history.push('/admin/new-orders');
+        }else{
+          history.push('/');
+          console.log(err);
+        }
+      })
+    }
+  }, [userAuth, history])
 
-    })
-    
-  }, [history])
+  
+
   return(
     <div className="admin-login">
       <h3>Efetue o Login para continuar</h3>

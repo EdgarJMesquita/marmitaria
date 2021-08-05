@@ -1,19 +1,22 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+// Context
 import { OrderContextProvider } from './context/OrderContext';
 import { UserContextProvider } from './context/UserContext';
 import { AuthContextProvider } from './context/AuthContext';
 import { AdminContextProvider } from './context/AdminContext';
 
+// Pages
 import { Home } from './pages/home';
 import { Cadastro } from './pages/cadastro';
 import { NewOrders } from './pages/admin/new-orders';
 import { Shipping } from './pages/admin/shipping';
 import { OrderDetails } from './pages/admin/order-details';
 import { Login } from './pages/admin';
+// Components
+import { Container } from './components/Container';
 
 import './styles/global.scss';
-import { Container } from './components/Container';
 
 function App() {
   return (
