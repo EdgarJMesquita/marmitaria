@@ -5,14 +5,16 @@ import { OrderContextProvider } from './context/OrderContext';
 import { UserContextProvider } from './context/UserContext';
 import { AuthContextProvider } from './context/AuthContext';
 import { AdminContextProvider } from './context/AdminContext';
-
+ 
 // Pages
-import { Home } from './pages/home';
-import { Cadastro } from './pages/cadastro';
-import { NewOrders } from './pages/admin/new-orders';
-import { Shipping } from './pages/admin/shipping';
-import { OrderDetails } from './pages/admin/order-details';
-import { Login } from './pages/admin';
+import { Home } from './pages/Home';
+import { Cadastro } from './pages/Cadastro';
+import { NewOrders } from './pages/Admin/NewOrders';
+import { Shipping } from './pages/Admin/Shipping';
+import { OrderDetails } from './pages/Admin/OrderDetails';
+import { Login } from './pages/Admin';
+//import { NotFound } from './pages/NotFound';
+
 // Components
 import { Container } from './components/Container';
 
@@ -33,6 +35,7 @@ function App() {
                   <Route path="/admin/shipping" component={ Shipping }/>
                   <Route path="/admin/new-orders" component={ NewOrders }/>
                   <Route path="/admin/order-details/:orderId" component={ OrderDetails }/>
+                 {/*  <Route path="*" component={ NotFound }/> */}
                 </AdminContextProvider>
               </UserContextProvider>
             </AuthContextProvider>

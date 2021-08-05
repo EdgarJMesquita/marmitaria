@@ -1,11 +1,11 @@
 
-export function newNotification(number:number){
-    if(number === 0) return;
+export function newNotification(){
+  
+
     function notify(){
-      const msg = `${number} Novo(s) pedido(s)`;
+      const msg = `Você tem um novo pedido`;
       new Notification(msg);
       navigator.vibrate([200,100,200]);
-      console.log('notifed');
       
     }
     

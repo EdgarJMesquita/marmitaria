@@ -8,6 +8,9 @@ import { database } from '../services/firebase';
 // Types
 import { ChildrenProps } from '../types/index';
 import { conveteAddressToURL } from '../utils/conveteAddressToURL';
+import { useAuth } from '../hooks/useAuth';
+
+import Swal from 'sweetalert';
 
 type AdminOrdersProps = {
   id: string;
@@ -37,21 +40,25 @@ const AdminContext = createContext({} as AdminContextProps);
 function AdminContextProvider({children}:ChildrenProps){
   
   const history = useHistory();
+  const { userAuth } = useAuth();
   const [ newOrders, setNewOrders ] = useState<AdminOrdersProps[]>();
   const [ shippingOrders, setShippingOrders ] = useState<AdminOrdersProps[]>();
 
-  useEffect(()=>{
+  /* useEffect(()=>{
     if(newOrders && newOrders.length !== 0){
       newNotification(newOrders.length);
     }
-  }, [newOrders])
+  }, [newOrders]) */
 
 
   useEffect(() => {
 
+    let isFirstLoad = false;
     const ordersRef = database.ref('orders');
 
     ordersRef.on('value',snap=>{
+      isFirstLoad = true;
+
       const data:FirebaseOrders = snap.val()?? {};
       const arrayOfOrders:AdminOrdersProps[] = Object.entries(data)?.map(([id,value])=>{
         return{
@@ -63,16 +70,22 @@ function AdminContextProvider({children}:ChildrenProps){
       
       const _newOrders = arrayOfOrders.filter(({status})=>status==='new');
       const _shippingOrders = arrayOfOrders.filter(({status})=>status==='shipping');
-      setNewOrders(_newOrders);                                                                                                                                                                                                                                                                                       
+      setNewOrders(_newOrders);                                                                                                                                                                                                                                                                          
       setShippingOrders(_shippingOrders); 
 
       console.log(arrayOfOrders);                                                                                                                                                                                                                                                                                                                                                                                         
-    })
+    });
+
+    ordersRef.on('child_added',(snap)=>{
+      if(isFirstLoad){
+        newNotification();
+      }
+    });
 
     return () => {
       ordersRef.off(); 
     }
-  }, [])
+  }, [userAuth])
 
   function getOrderDetails(id:string){
     if(newOrders && shippingOrders){
@@ -83,17 +96,35 @@ function AdminContextProvider({children}:ChildrenProps){
   }
 
   function setOrderToShipping(id:string){
-    const orderRef = database.ref(`orders/${id}`);
-    orderRef.update({
+
+    database.ref(`orders/${id}`)
+    .update({
       status: 'shipping'
-    },(err)=>console.log(err));
-    history.push('/admin/new-orders');
+
+    })
+    .then(()=>{
+      history.push('/admin/new-orders');
+      
+    })
+    .catch(err=>{
+      Swal('Algo deu errado', 'Tente novamente', 'error');
+      console.log(err);
+    })
+
   }
 
   function endOrder(id:string){
-    const orderRef = database.ref(`orders/${id}`);
-    orderRef.remove();
-    history.push('/admin/shipping');
+    database.ref(`orders/${id}`)
+    .remove()
+    .then(()=>{
+      Swal('Pedido entregue com sucesso','','success', { timer:2000 });
+      history.push('/admin/shipping');
+
+      })
+    .catch(err=>{
+      Swal('Algo deu errado','','error', 'Tente novamente');
+      console.log(err);
+    })
   }
 
   return(

@@ -22,12 +22,12 @@ export function Form(){
           {user.telephone.length < 11 && hasFailed && <span>Digite seu número telefone</span>}
       </div>
       <div className="cep-input-container">
-        <input onChange={handleInput} value={user.cep} name="cep" className="cep-input" type="text" placeholder="00000-00" />
+        <input onChange={handleInput} value={user.cep} name="cep" className="cep-input" type="tel" placeholder="00000-00" />
         {user.cep.length !== 8 && hasFailed && <span>Cep inválido</span>}
         <div onClick={getCep} className="search-cep"><img src={searchIcon} alt="procurar cep" /></div> 
       </div>
       <div>
-        <input onChange={handleInput} value={user.street} name="street" type="text" placeholder="Rua" />
+        <input onChange={handleInput} value={user.street} name="street" type="tel" placeholder="Rua" />
         {user.street.length < 3 && hasFailed && <span>Digite a rua</span>}
       </div>
       <div>

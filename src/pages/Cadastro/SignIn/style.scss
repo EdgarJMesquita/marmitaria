@@ -21,7 +21,6 @@
 
     span {
       color: #fff;
-      font-family: 'Roboto',sans-serif;
       font-weight: 500;
       font-size: 1.3rem;
     }
@@ -29,36 +28,35 @@
 
   p {
     margin-top: 0.5rem;
-    opacity: 50%;
-    font-family: 'Roboto',sans-serif;
+    color: #8f8f8f;
     text-align: center;
   }
 
-}
-.separador {
-  font-size: 14px;
-  color: #a8a8b3;
-
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-
-  // Teste
-  justify-content: center;
-
-  &::before {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #a8a8b3;
-    margin-right: 16px;
-  }
-
-  &::after {
+  .separador {
+    font-size: 14px;
+    color: #a8a8b3;
+    
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    
+    // Teste
+    justify-content: center;
+    
+    &::before {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #a8a8b3;
+      margin-right: 16px;
+    }
+    
+    &::after {
       content: '';
       flex: 1;
       height: 1px;
       background: #a8a8b3;
       margin-left: 16px;
+    }
   }
 }

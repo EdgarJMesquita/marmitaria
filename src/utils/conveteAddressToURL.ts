@@ -12,6 +12,6 @@ function encodeString(str:string){
 
 export function conveteAddressToURL({ number, street, neighborhood, cep }:BananaProps){
 
-  return [number, encodeString(street), encodeString(neighborhood), cep].join('%2C');
+  return [ number, encodeString(street), encodeString(neighborhood), cep ].join('%2C');
 
 }

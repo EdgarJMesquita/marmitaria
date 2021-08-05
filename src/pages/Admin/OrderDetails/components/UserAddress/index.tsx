@@ -39,7 +39,7 @@ export function UserAddress({address}:UserAddressProps){
                     `https://www.google.com/maps/search/${address?.encodedAddress}`
                   } target="_blank" rel="noreferrer" title="Abrir no mapa">
             Abrir endereço no mapa
-            <img src={googleMapsIcon} alt="google map"/>
+            <img className="map-icon" src={googleMapsIcon} alt="google map"/>
           </a>
         </li>
       </ul>

@@ -10,7 +10,6 @@ form {
     padding-left: 0.8rem;
     border-radius: 10px;
     border: 1px solid #A8A8B3;
-    color: #4f4f4f;
     outline: none;
     background-color: #fff;
     
@@ -23,6 +22,7 @@ form {
       font-size: 1.3rem;
       color: #4f4f4f;
       width: 80%;
+     
     }
 
     input + span {
@@ -30,7 +30,6 @@ form {
       position: absolute;
       font-size: 0.8rem;
       font-weight: 300;
-      font-family: 'Roboto', sans-serif;
       top: 3.4rem;
       left: 0.2rem;
     }
@@ -53,45 +52,11 @@ form {
         height: 2rem;
       }
     }
-
-    /* .cep-input-container {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: 10px;
-      border: 1px solid #A8A8B3;
-      color: #4f4f4f;
-      outline: none;
-      background-color: white;
-      
-      .cep-input {
-        height: auto;
-        width: 90%;
-        margin: 0;
-        padding: 0;
-        border: none;
-        color: #4f4f4f;
-        font-size: 1.3rem;
-        outline: none;
-      }
-    } */
-
-    /* > div {
-      width: 100%;
-      height: 3.3rem;
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: 10px;
-      border: 1px solid #A8A8B3;
-      color: #4f4f4f;
-      font-size: 1.3rem;
-      outline: none;
-    } */
   
   }
 
-
   button {
-    margin-bottom: 4.5rem;
+    margin-bottom: 5rem;
     width: 100%;
     height: 3.5rem;
     font-size: 1.3rem;

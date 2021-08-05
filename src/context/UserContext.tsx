@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 // Custom Hooks
 import { useOrder } from '../hooks/useOrder';
 import { useAuth } from '../hooks/useAuth';
-// Third party libraries
+// Third party Modal library
 import Swal from 'sweetalert';
 
 type UserProps = {
@@ -48,13 +48,22 @@ function UserContextProvider(props:ChildrenProps){
   const history = useHistory();
 
   useEffect(() => {
+    // Recuperando endereço do usuário
     if(userAuth){
+      // Usuário cadastrado
+      // Recuperando dados do banco de dados
       const userDataRef = database.ref(`users/${userAuth?.id}`)
       userDataRef.once('value',snap=>{
         const userData:UserProps | undefined = snap.val();
         userData && setUser({...userData});
         
       })
+
+    }else{
+      // Usuário não cadastrado
+      // Recuperando dados do localStorage 
+      const data = localStorage.getItem('userAddress');
+      data && setUser(JSON.parse( data ));
     }
   }, [userAuth]);
 
@@ -71,7 +80,7 @@ function UserContextProvider(props:ChildrenProps){
       
       if(promise.status === 200){
         const res: CepProps = await promise.json();
-        const { street, neighborhood} = res;
+        const { street, neighborhood } = res;
         setUser(prevState=>({
           ...prevState,
           street,
@@ -89,11 +98,9 @@ function UserContextProvider(props:ChildrenProps){
 
   function validateOrder(){
     const order = menu.filter(item=>item.isSelected).map(item=>item.content);
-
     if(order.length < 1) {
       Swal('Sua cestinha está vazia','Você ainda não escolheu seu prato, deseja ir ao cardápio?','info',{ buttons:['Cancelar','Confirmar']})
       .then(res=>res && history.push('/'));
-
       return 0;
     }
     return order;
@@ -122,11 +129,16 @@ function UserContextProvider(props:ChildrenProps){
         throw new Error(`Serviço indisponível ${err}`)
       })
 
+
     if(userAuth){
       const userRef = database.ref(`users/${userAuth?.id}`);
+
       userRef.update(user)
-        .then(()=>console.log('Usuário cadastrado!'))
-        .catch(err=>{ throw new Error(`Indisponível ${err}`) })
+        .catch(err=>{ throw new Error(`Indisponível ${err}`) });
+        
+    }else {
+      localStorage.setItem('userAddress',JSON.stringify(user));
+
     }
   }
 
@@ -134,8 +146,9 @@ function UserContextProvider(props:ChildrenProps){
     event.preventDefault();
 
     const order = validateOrder();
+    const isUserInputValited = checkUserInput();
     
-    if(order && checkUserInput()) {
+    if(order && isUserInputValited) {
       sendOrder(order);
       
     }else{
@@ -156,5 +169,5 @@ function UserContextProvider(props:ChildrenProps){
   )
 }
 
-export { UserContext, UserContextProvider} 
+export { UserContext, UserContextProvider } 
 

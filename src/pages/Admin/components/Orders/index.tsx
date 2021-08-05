@@ -1,10 +1,10 @@
-// Assets
-import showDetailsIcon from '../../../../assets/images/showDetailsIcon.svg';
 // Hooks
 import { useHistory } from 'react-router-dom';
-
-import './style.scss';
+// Components
 import { Container } from '../../../../components/Container';
+// Assets
+import showDetailsIcon from '../../../../assets/images/showDetailsIcon.svg';
+import './style.scss';
 
 type OrdersProps = {
   id: string;
