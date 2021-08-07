@@ -5,6 +5,7 @@ export type OrderProps = {
   content: string;
   image: string;
   isSelected: boolean;
+  isAvailable: boolean;
   type: string;
 };
 

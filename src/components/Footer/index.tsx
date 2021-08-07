@@ -29,7 +29,7 @@ export function Footer(){
         </div>
         <p>Pronto para entrega</p>
       </div>
-      <div>
+      <div onClick={()=>history.push('/admin/edit-menu')}>
         <div>
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
         </div>

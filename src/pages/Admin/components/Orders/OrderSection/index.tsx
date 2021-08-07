@@ -24,9 +24,9 @@ export function OrdersSection({order}:Banana){
     {order?.length === 0 && <li style={{justifyContent:"center"}}>Não há pedidos</li>}
     {order.map(order=>{
         return(
-          <li onClick={()=>history.push(`/admin/order-details/${order?.id}`)}  key={order?.id} title={`Abrir pedido ${order?.name}`} >
-           <span>{order?.name}</span>
-           <img src={showDetailsIcon} alt="Mostrar detalhes" />
+          <li onClick={()=>history.push(`/admin/order-details/${order?.id}`)} key={order?.id} title={`Abrir pedido ${order?.name}`} >
+            <span>{order?.name}</span>
+            <img src={showDetailsIcon} alt="Mostrar detalhes" />
          </li>
        )})}
    </>

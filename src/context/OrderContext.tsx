@@ -8,6 +8,7 @@ type ContextProps = {
   handleBasket: (id:string)=>void;
   clearOrder: ()=>void;
   menu: OrderProps[];
+  setMenu: (id:OrderProps[])=>void;
 }
 
 const OrderContext = createContext({} as ContextProps);
@@ -84,6 +85,7 @@ function OrderContextProvider({children}:ChildrenProps){
   return(
     <OrderContext.Provider value={{
       menu,
+      setMenu,
       handleBasket,
       clearOrder
     }}>

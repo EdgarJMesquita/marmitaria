@@ -11,6 +11,7 @@ import { database } from '../services/firebase';
 import { ChildrenProps } from '../types/index';
 
 import Swal from 'sweetalert';
+import { useOrder } from '../hooks/useOrder';
 
 type AdminOrdersProps = {
   id: string;
@@ -30,6 +31,8 @@ type AdminContextProps = {
   getOrderDetails:(id:string)=>AdminOrdersProps | undefined;
   setOrderToShipping:(id:string)=>void;
   endOrder:(id:string)=>void;
+  handleMenu:(id:string)=>void;
+  updateMenu:()=>void;
 }
 
 type FirebaseOrders = Record<string,AdminOrdersProps>;
@@ -41,8 +44,26 @@ function AdminContextProvider({children}:ChildrenProps){
   
   const history = useHistory();
   const { userAuth } = useAuth();
+  const { menu, setMenu } = useOrder();
   const [ newOrders, setNewOrders ] = useState<AdminOrdersProps[]>();
   const [ shippingOrders, setShippingOrders ] = useState<AdminOrdersProps[]>();
+
+  
+  function handleMenu(id:string){
+    const updatedMenu = menu.map(item=>item.id===id? { ...item, isAvailable: !item.isAvailable } : { ...item });
+    setMenu(updatedMenu);
+    
+    
+  }
+
+  function updateMenu(){
+    Swal('Deseja atualizar o menu?','',{buttons:['Voltar','Confirmar']}).then(res=>{
+      if(res){
+        database.ref('menu').set(menu, err=> err && console.log('Error'+err));
+        console.log('hey');
+      }
+    })
+  }
 
   /* useEffect(()=>{
     if(newOrders && newOrders.length !== 0){
@@ -132,12 +153,12 @@ function AdminContextProvider({children}:ChildrenProps){
       shippingOrders,
       getOrderDetails,
       setOrderToShipping,
-      endOrder
-
+      endOrder,
+      handleMenu,
+      updateMenu
     }}>
       {children}
     </AdminContext.Provider>
   )
 }
-
 export { AdminContext, AdminContextProvider }
