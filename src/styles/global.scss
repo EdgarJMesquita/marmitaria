@@ -10,6 +10,13 @@ body {
   background-color: #f8f8f8;
 }
 
+:root {
+  --white: #fff;
+  --headingColor: #4f4f4f;
+  --textColor: #5a5858;
+  --whitePlaceholder: #d3d3d8;
+}
+
 @media screen and (min-width: 500px){
   .responsive{
     display: flex;

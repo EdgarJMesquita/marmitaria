@@ -1,9 +1,9 @@
-import { useAuth } from "../../hooks/useAuth"
+import { useAuth } from "../../../hooks/useAuth"
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { database } from "../../services/firebase";
-import { Container } from "../../components/Container";
-import googleLogo from '../../assets/images/googleLogo.svg';
+import { database } from "../../../services/firebase";
+import { Container } from "../../../components/Container";
+import googleLogo from '../../../assets/images/googleLogo.svg';
 import './style.scss'
 
 export function Login(){

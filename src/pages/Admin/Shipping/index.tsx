@@ -8,7 +8,7 @@ export function Shipping(){
   return(
     <>
       <Container classname="">
-        <OrdersList title="Prontos para entrega" orders={shippingOrders} />
+        <OrdersList title="Para entrega" orders={shippingOrders} />
       </Container>
       <Footer />
     </>

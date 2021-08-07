@@ -1,35 +1,36 @@
+@mixin flexSpaceBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .order-details {
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   width: 85%;
 
   h3 {
-    font-size: 1.5rem;
-    color: #4f4f4f;
+    font-size: 2rem;
+    color: var(--headingColor);
     margin: 2rem 0 0.5rem;
   }
 
   ul {
-    background-color: #ffffff;
     list-style-type: none;
-    border: 1px solid #d3d3d8;
     border-radius: 10px;
+    background-color: var(--white);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   }
 
   li {
-    color: #5a5858;
+    height: 4rem;
+    color: var(--textColor);
     font-weight: 300;
-    height: 3.625rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     font-size: 1.3rem;
     padding: 1rem;
 
     a {
+      @include flexSpaceBetween;
       width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       color: inherit;
     } 
 
