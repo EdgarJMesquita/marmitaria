@@ -1,6 +1,8 @@
 
 .menu-section {
   display: flex;
-  gap: 1rem;
-
+  flex-wrap: wrap;
+  width: 100%;
+  //gap: 1rem;
+  justify-content: flex-start;
 }

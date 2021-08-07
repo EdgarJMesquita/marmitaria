@@ -48,7 +48,6 @@ function UserContextProvider(props:ChildrenProps){
   const history = useHistory();
 
   useEffect(() => {
-    // Recuperando endereço do usuário
     if(userAuth){
       // Usuário cadastrado
       // Recuperando dados do banco de dados
@@ -58,7 +57,6 @@ function UserContextProvider(props:ChildrenProps){
         userData && setUser({...userData});
         
       })
-
     }else{
       // Usuário não cadastrado
       // Recuperando dados do localStorage 
@@ -67,10 +65,43 @@ function UserContextProvider(props:ChildrenProps){
     }
   }, [userAuth]);
 
-  
+  function handleTelephone(value:string){
+    
+    let telephone = value;
+    const telLength = value.length;
+    
+    if(telLength > 16) {
+      return telephone;
+    }
+
+    if(value.length === 1){
+      telephone = `(${value}`;
+
+    }else if(telephone.length === 3){
+      telephone = `${value}) `;
+     
+    }else if(telephone.length === 6){
+      telephone = `${value}.`
+
+    }else if(telephone.length === 11){
+      telephone = `${value}-`
+
+    }
+    if(user.telephone.length > telLength){
+      telephone = value.slice(0,value.length);
+    }
+    return telephone
+  }
+
   function handleInput(event:FormEvent<HTMLInputElement>){
     const { name, value } = event.currentTarget;
-    setUser(prevState=>({...prevState, [name]: value}));
+    if(name === 'telephone'){
+      const telephone = handleTelephone(value);
+      setUser(prevState=>({...prevState, telephone}));
+
+    }else{
+      setUser(prevState=>({...prevState, [name]: value}));
+    }
   }
 
   async function getCep(){
@@ -108,7 +139,7 @@ function UserContextProvider(props:ChildrenProps){
 
   function checkUserInput(){
     const { name, telephone, street, number, neighborhood } = user;
-    return name && telephone && street && number && neighborhood;
+    return name && telephone.length === 16 && street && number && neighborhood;
   }
 
   function sendOrder(order:string[]){
@@ -126,6 +157,7 @@ function UserContextProvider(props:ChildrenProps){
         clearOrder();
         
       }).catch(err=> {
+        Swal('Serviço indisponível',`${err}`,'error')
         throw new Error(`Serviço indisponível ${err}`)
       })
 

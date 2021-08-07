@@ -1,14 +1,14 @@
-// React Hooks
+// Hooks
 import { createContext, useEffect, useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom';
 // Utils
 import { newNotification } from '../utils/newNotification';
+import { conveteAddressToURL } from '../utils/conveteAddressToURL';
 // Database Connection
 import { database } from '../services/firebase';
 // Types
 import { ChildrenProps } from '../types/index';
-import { conveteAddressToURL } from '../utils/conveteAddressToURL';
-import { useAuth } from '../hooks/useAuth';
 
 import Swal from 'sweetalert';
 
@@ -73,7 +73,6 @@ function AdminContextProvider({children}:ChildrenProps){
       setNewOrders(_newOrders);                                                                                                                                                                                                                                                                          
       setShippingOrders(_shippingOrders); 
 
-      console.log(arrayOfOrders);                                                                                                                                                                                                                                                                                                                                                                                         
     });
 
     ordersRef.on('child_added',(snap)=>{

@@ -12,8 +12,9 @@ export function Menu({menu}:MenuProps){
   const history = useHistory();
 
   function checkOrder(){
-    const selectedItens = menu.filter(item=>item.isSelected).length;
-    if(selectedItens < 1){
+    const selectedItens = menu.filter(({isSelected})=>isSelected);
+  
+    if(selectedItens.length < 1){
       Swal('Cesta vazia','Escolha seu prato para continuar','info');
       return;
     }
