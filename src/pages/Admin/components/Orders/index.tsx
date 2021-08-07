@@ -29,8 +29,9 @@ export function OrdersList({orders, title}:BananaProps){
     <Container classname="orders">
      <h3>{title}</h3>
       <ul>
-        {orders && <Section order={orders}/>}      
-        {!orders && <li style={{justifyContent:"center"}}>Carregando</li>}
+        {orders && <Section order={orders}/>}
+          
+        {!orders && <OrderPlaceholder /> /* <li className="order-placeholder" style={{justifyContent:"center"}}>Carregando</li> */}
       </ul>
     </Container>
   )
@@ -55,5 +56,15 @@ function Section({order}:Banana){
          </li>
        )})}
    </>
+  )
+}
+
+function OrderPlaceholder(){
+  return(
+    <>
+      <li id="order-placeholder"></li>
+      <li id="order-placeholder"></li>
+      <li id="order-placeholder"></li>
+    </>
   )
 }

@@ -23,6 +23,7 @@
     color: #5a5858;
     padding: 1rem;
     border: 1px solid #d3d3d8;
+    //border: 1px solid #5a5858;
     border-radius: 10px;
     background-color: #fff;
     //box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -36,4 +37,36 @@
     margin-bottom: 5rem;
   }
 
+}
+
+#order-placeholder {
+  height: 3.75rem;
+  width: 100%;
+  color: #A8A8B3;
+  background-color: #cecece;
+  //background: linear-gradient(-45deg, #eeeded, #e4e4e4,);
+  //background-size: 400% 400%;
+  border: none;
+  animation:  blink 1.5s ease infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1;}
+  50% { opacity: 0.5;}
+  100% { opacity: 1;}
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+   // opacity: 1;
+	}
+	50% {
+		background-position: 100% 50%;
+   // opacity: 0.5;
+	}
+	100% {
+		background-position: 0% 50%;
+   // opacity: 1;
+	}
 }
