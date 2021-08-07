@@ -1,46 +1,38 @@
-# Getting Started with Create React App
+# Marmitaria
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web App para solicitação de pedidos e administrar entregas. Desenvolvido para marmitarias, restaurantes e/ou pizzarias.
 
-## Available Scripts
+## Funcionalidades para o cliente
 
-In the project directory, you can run:
+1. O cliente pode acessar o web app e selecionar os itens do cardápio. Em seguida preencher o formulário com os dados necessários para entrega. Com a possibilidade 
+de pesquisar seu cep com a [BrasilAPI](brasilapi.com.br/).
 
-### `npm start`
+2. O cliente tem a opção de autenticar com o Google e salvar o endereço para pedidos futuros.(caso não autenticado os dados ficarão salvos no localStorage do browser).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Funcionalidades do estabelecimento (admin)
 
-### `npm test`
+1. Autenticação com o Google para acessar a página do admin.
+2. O admin receberá todos os pedidos, separados em dois status(new ou shipping);
+3. Nos detalhes pode se comunicar com o cliente através do WhatsApp (Web ou App) de acordo com a plataforma utilizada (Android ou desktop).
+4. Nos detalhes pode abrir o mapa(Google Maps ou App de navegação padrão) de acordo com a plataforma utilizada (Android ou desktop). 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. Admin pode modificar os itens disponíveis no cardápio.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tecnologias utilizadas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. React.js.
+2. Typescript.
+3. Sass.
+4. Firebase(realtime database e storage)
+5. [BrasilAPI](brasilapi.com.br/).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Meu objetivo
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Feito puramente para aprendizado e auto melhoria.
+Estou a procura do primeiro emprego na TI.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
