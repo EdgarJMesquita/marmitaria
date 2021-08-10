@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 type ContainerProps = {
   children: ReactNode;
-  classname: string | undefined;
+  classname?: string | undefined;
 }
 
 export function Container({classname, children}:ContainerProps){

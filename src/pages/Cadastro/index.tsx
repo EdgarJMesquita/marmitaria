@@ -14,7 +14,7 @@ export function Cadastro(){
 
   return(
     <>
-      <Container classname="">
+      <Container classname="cadastro">
         <GoBackLink />
         {!userAuth && <SignIn/>}
         {userAuth && <Signed/>}

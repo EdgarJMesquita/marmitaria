@@ -3,7 +3,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  min-height: 4.20rem;
+  height: 4rem;
   padding: 0 0.4rem;
   border-top: 2px dotted #A8A8B3;
   border-bottom: 2px dotted #A8A8B3;
@@ -11,10 +11,8 @@
   list-style-type: none;
 
   display: flex;
-  gap: 1rem;
   align-items: center;
-  
-  overflow-x: scroll;
+  gap: 0.5rem;
   
   background-color: #ECEAEA;
 

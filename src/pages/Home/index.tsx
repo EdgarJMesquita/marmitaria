@@ -10,7 +10,7 @@ export function Home(){
 
   return(
     <>
-      <Container classname="">
+      <Container>
         <Menu menu={menu}/>
       </Container>
       <Basket />
