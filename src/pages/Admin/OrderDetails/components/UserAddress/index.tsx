@@ -37,7 +37,7 @@ export function UserAddress({address}:UserAddressProps){
         <li>{address?.number}</li>
         <li>{address?.neighborhood}</li>
         <li>
-          <a href={mapURL} target="_blank" rel="noreferrer" title="Abrir no mapa">
+          <a href={`${mapURL}${address?.encodedAddress}`} target="_blank" rel="noreferrer" title="Abrir no mapa">
             Abrir mapa
             <img className="map-icon" src={googleMapsIcon} alt="google map"/>
           </a>
