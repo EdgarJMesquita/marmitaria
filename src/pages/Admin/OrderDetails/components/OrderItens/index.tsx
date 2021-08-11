@@ -5,7 +5,7 @@ type OrderItensProps = {
 export function OrderItens({itens}:OrderItensProps){
   return(
     <>
-      <h3>Pedido</h3>
+      <h1>Pedido</h1>
         <ul>
           {itens?.map((item,index)=>{
             return(

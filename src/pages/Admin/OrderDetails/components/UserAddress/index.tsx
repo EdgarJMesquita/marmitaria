@@ -17,10 +17,13 @@ type UserAddressProps = {
 
 export function UserAddress({address}:UserAddressProps){
   const isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1;
+  const desktopURL = 'https://www.google.com/maps/search/';
+  const androidURL = 'geo:0,0?q=';
+  const mapURL = isAndroid? androidURL : desktopURL;
 
   return(
     <>
-      <h3>Endereço</h3>
+      <h1>Endereço</h1>
       <ul>
         <li>{address?.name}</li>
         <li>
@@ -34,11 +37,8 @@ export function UserAddress({address}:UserAddressProps){
         <li>{address?.number}</li>
         <li>{address?.neighborhood}</li>
         <li>
-          <a href={isAndroid? 
-                    `geo:0,0?q=${address?.encodedAddress}` : 
-                    `https://www.google.com/maps/search/${address?.encodedAddress}`
-                  } target="_blank" rel="noreferrer" title="Abrir no mapa">
-            Abrir endereço no mapa
+          <a href={mapURL} target="_blank" rel="noreferrer" title="Abrir no mapa">
+            Abrir mapa
             <img className="map-icon" src={googleMapsIcon} alt="google map"/>
           </a>
         </li>

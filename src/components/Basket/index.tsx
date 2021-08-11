@@ -1,6 +1,6 @@
 import { BasketItem } from './BasketItem';
 import { useOrder } from '../../hooks/useOrder';
-import './styles.scss';
+import './styles copy.scss';
 
 
 export function Basket(){

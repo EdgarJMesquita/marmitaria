@@ -26,6 +26,7 @@ export function OrdersSection({order}:Banana){
         return(
           <li onClick={()=>history.push(`/admin/order-details/${order?.id}`)} key={order?.id} title={`Abrir pedido ${order?.name}`} >
             <span>{order?.name}</span>
+            <span>{order?.telephone}</span>
             <img src={showDetailsIcon} alt="Mostrar detalhes" />
          </li>
        )})}

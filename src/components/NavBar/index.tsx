@@ -6,15 +6,16 @@ import editIcon from '../../assets/images/editIcon.svg';
 import { useHistory } from 'react-router-dom';
 import { useAdmin } from '../../hooks/useAdmin';
 
-import './styles.scss';
+import './styles copy.scss';
+import { Container } from '../Container';
 
 
-export function Footer(){
+export function NavBar(){
   const history = useHistory();
   const { newOrders, shippingOrders } = useAdmin();
 
   return(
-    <footer>
+    <Container classname="navbar">
       <div onClick={()=>history.push('/admin/new-orders')} title="Novos pedidos">
         <div>
           <img src={newOrderIcon} alt="novos pedidos" />
@@ -22,6 +23,7 @@ export function Footer(){
         </div>
         <p>Novos pedidos</p>
       </div>
+
       <div onClick={()=>history.push('/admin/shipping')} title="Pedidos pronto para entrega">
         <div>
           <img src={shippingIcon} alt="pedidos prontos para entrega" />
@@ -29,12 +31,13 @@ export function Footer(){
         </div>
         <p>Pronto para entrega</p>
       </div>
+      
       <div onClick={()=>history.push('/admin/edit-menu')}>
         <div>
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
         </div>
         <p>Editar cardápio</p>
       </div>
-    </footer>
+    </Container>
   )
 }

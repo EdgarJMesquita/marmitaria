@@ -1,17 +1,11 @@
 
 
-footer {
-  position: fixed;
-  bottom: 0;
-  height: 4.5rem;
-  width: 100%;
-  background-color: #FFE194;
-
+.navbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-
+  background-color: #FFE194;
+  
   div {
     position: relative;
     cursor: pointer;

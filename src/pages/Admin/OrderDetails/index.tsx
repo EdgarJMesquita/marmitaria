@@ -1,5 +1,5 @@
 // Components
-import { Footer } from '../../../components/Footer';
+import { NavBar } from '../../../components/NavBar';
 import { OrderItens } from './components/OrderItens';
 import { UserAddress } from './components/UserAddress';
 import { Container } from '../../../components/Container';
@@ -24,14 +24,14 @@ export function OrderDetails({match}:ParamsProps){
   const currentOrder = getOrderDetails(orderId); 
 
   return(
-    <>
+    <Container classname="main">
       <Container classname="order-details">
         <GoBackLink />
         <OrderItens itens={currentOrder?.order}/>
         <UserAddress address={currentOrder}/>
         <Button orderStatus={currentOrder?.status} orderId={orderId}/>
       </Container>
-      <Footer />
-    </>
+      <NavBar />
+    </Container>
   )
 }

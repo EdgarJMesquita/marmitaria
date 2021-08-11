@@ -25,7 +25,7 @@ type BananaProps = {
 export function OrdersList({orders, title}:BananaProps){
   return(
     <Container classname="orders">
-     <h3>{title}</h3>
+     <h1>{title}</h1>
       <ul>
         {orders && <OrdersSection order={orders}/>}
         {!orders && <OrderPlaceholder />}

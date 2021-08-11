@@ -6,7 +6,7 @@ export function SignIn(){
   const { signInWithGoogle } = useAuth();
   return(
     <div className="login-button-container">
-      <button onClick={signInWithGoogle} >
+      <button id="googleButton" onClick={signInWithGoogle} >
         <img src={googleLogo} alt="google logo" />
         <span>Login com Google</span>
       </button>

@@ -9,11 +9,13 @@ export function Home(){
   const { menu } = useOrder();
 
   return(
-    <>
-      <Container>
-        <Menu menu={menu}/>
-      </Container>
+    <Container classname="main">
+      <Menu menu={menu}/>
       <Basket />
-    </>
+    </Container>
   )
 }
+ /* <Container>
+        <Menu menu={menu}/>
+      </Container>
+      <Basket /> */

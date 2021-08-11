@@ -17,13 +17,11 @@ import { EditarMenu } from './pages/Admin/EditarMenu';
 //import { NotFound } from './pages/NotFound';
 
 // Components
-import { Container } from './components/Container';
 
-import './styles/global.scss';
+import './styles/global copy.scss';
 
 export default function App() {
   return (
-    <Container classname="responsive">
       <BrowserRouter>
         <Switch>
           <OrderContextProvider>
@@ -44,6 +42,5 @@ export default function App() {
           </OrderContextProvider>
         </Switch>
       </BrowserRouter>
-    </Container>
   );
 }
