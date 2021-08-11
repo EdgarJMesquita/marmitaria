@@ -6,7 +6,7 @@ import editIcon from '../../assets/images/editIcon.svg';
 import { useHistory } from 'react-router-dom';
 import { useAdmin } from '../../hooks/useAdmin';
 
-import './styles copy.scss';
+import './styles.scss';
 import { Container } from '../Container';
 
 
