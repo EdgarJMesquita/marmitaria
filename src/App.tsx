@@ -15,10 +15,9 @@ import { OrderDetails } from './pages/Admin/OrderDetails';
 import { Login } from './pages/Admin/Login';
 import { EditarMenu } from './pages/Admin/EditarMenu';
 //import { NotFound } from './pages/NotFound';
-
 // Components
 
-import './styles/global copy.scss';
+import './styles/global.scss';
 
 export default function App() {
   return (

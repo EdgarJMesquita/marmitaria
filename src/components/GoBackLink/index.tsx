@@ -1,5 +1,4 @@
 import { useHistory } from "react-router-dom"
-//import backArrow from '../../assets/images/backArrow.svg';
 import goBackIcon from '../../assets/images/goBackIcon.svg';
 import './style.scss';
 

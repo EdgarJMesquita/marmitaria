@@ -31,7 +31,7 @@ export function Login(){
     <Container classname="main">
       <Container classname="admin-login">
         <h3>Efetue o Login para continuar</h3>
-        <button onClick={signInWithGoogle} >
+        <button className="google-btn" onClick={signInWithGoogle} >
           <img src={googleLogo} alt="google logo" />
           <span>Login com Google</span>
         </button>

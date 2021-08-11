@@ -29,14 +29,14 @@ export function NavBar(){
           <img src={shippingIcon} alt="pedidos prontos para entrega" />
           { shippingOrders && shippingOrders?.length > 0 && <span>{shippingOrders?.length}</span>}
         </div>
-        <p>Pronto para entrega</p>
+        <p>Para entrega</p>
       </div>
       
       <div onClick={()=>history.push('/admin/edit-menu')}>
         <div>
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
         </div>
-        <p>Editar cardápio</p>
+        <p>Editar</p>
       </div>
     </Container>
   )

@@ -20,8 +20,7 @@ form {
       outline: none;
       font-size: 1.3rem;
       color: #4f4f4f;
-      width: 80%;
-     
+      flex: 1;
     }
 
     input + span {
@@ -49,8 +48,5 @@ form {
         height: 2rem;
       }
     }
-  
   }
-
-  
 }
