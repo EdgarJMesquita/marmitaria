@@ -147,7 +147,8 @@ function UserContextProvider(props:ChildrenProps){
     const userOrder = {
       ...user,
       order,
-      status: 'new'
+      status: 'new',
+      createdAt: Date.now()
     }
 
     database.ref('orders').push(userOrder)

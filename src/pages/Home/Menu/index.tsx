@@ -25,7 +25,7 @@ export function Menu({menu}:MenuProps){
     <div className="menu">
         <MenuSection title="Misturas" foodType="misturas" menu={menu}/>
         <MenuSection title="Guarnições" foodType="guarnicoes" menu={menu}/>
-        <MenuSection title="Bebidas" foodType="guarnicoes" menu={[]}/>
+        {/* <MenuSection title="Bebidas" foodType="guarnicoes" menu={[]}/> */}
         <div className="btn-con">
           <button onClick={checkOrder} >Continuar</button>
         </div>

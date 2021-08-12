@@ -2,6 +2,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom';
+import { useOrder } from '../hooks/useOrder';
 // Utils
 import { newNotification } from '../utils/newNotification';
 import { conveteAddressToURL } from '../utils/conveteAddressToURL';
@@ -11,7 +12,6 @@ import { database } from '../services/firebase';
 import { ChildrenProps } from '../types/index';
 
 import Swal from 'sweetalert';
-import { useOrder } from '../hooks/useOrder';
 
 type AdminOrdersProps = {
   id: string;
@@ -23,6 +23,7 @@ type AdminOrdersProps = {
   neighborhood: string;
   order: string[];
   status: 'new' | 'shipping';
+  createdAt: number;
   encodedAddress: string;
 }
 type AdminContextProps = {
@@ -53,24 +54,14 @@ function AdminContextProvider({children}:ChildrenProps){
     const updatedMenu = menu.map(item=>item.id===id? { ...item, isAvailable: !item.isAvailable } : { ...item });
     setMenu(updatedMenu);
     
+  }
+
+  async function updateMenu(){
+    const userResponse = await Swal('Deseja atualizar o menu?','',{buttons:['Voltar','Confirmar']});
+    userResponse && database.ref('menu')
+    .set(menu, err=>  err && console.log('Error'+err));
     
   }
-
-  function updateMenu(){
-    Swal('Deseja atualizar o menu?','',{buttons:['Voltar','Confirmar']}).then(res=>{
-      if(res){
-        database.ref('menu').set(menu, err=> err && console.log('Error'+err));
-        console.log('hey');
-      }
-    })
-  }
-
-  /* useEffect(()=>{
-    if(newOrders && newOrders.length !== 0){
-      newNotification(newOrders.length);
-    }
-  }, [newOrders]) */
-
 
   useEffect(() => {
 
@@ -82,6 +73,7 @@ function AdminContextProvider({children}:ChildrenProps){
 
       const data:FirebaseOrders = snap.val()?? {};
       const arrayOfOrders:AdminOrdersProps[] = Object.entries(data)?.map(([id,value])=>{
+        
         return{
           ...value,
           encodedAddress: conveteAddressToURL(value),
@@ -93,9 +85,9 @@ function AdminContextProvider({children}:ChildrenProps){
       const _shippingOrders = arrayOfOrders.filter(({status})=>status==='shipping');
       setNewOrders(_newOrders);                                                                                                                                                                                                                                                                          
       setShippingOrders(_shippingOrders); 
-
+      console.log(arrayOfOrders);
     });
-
+    
     ordersRef.on('child_added',(snap)=>{
       if(isFirstLoad){
         newNotification();
@@ -109,9 +101,8 @@ function AdminContextProvider({children}:ChildrenProps){
 
   function getOrderDetails(id:string){
     if(newOrders && shippingOrders){
-      const allOrders = [...newOrders,...shippingOrders];
-      const currentOrder = allOrders.find(order=>order.id === id);
-      return currentOrder;
+      return [...newOrders,...shippingOrders].find(order=>order.id === id);
+     
     }
   }
 

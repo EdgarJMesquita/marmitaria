@@ -15,7 +15,8 @@ type OrdersProps = {
   neighborhood: string;
   order: string[];
   status: 'new' | 'shipping';
-} | undefined;
+  createdAt: number;
+}
 
 type BananaProps = {
   orders: OrdersProps[] | undefined;
@@ -27,7 +28,7 @@ export function OrdersList({orders, title}:BananaProps){
     <Container classname="orders">
      <h1>{title}</h1>
       <ul>
-        {orders && <OrdersSection order={orders}/>}
+        {orders && <OrdersSection orders={orders}/>}
         {!orders && <OrderPlaceholder />}
       </ul>
     </Container>
