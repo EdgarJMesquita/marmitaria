@@ -6,7 +6,7 @@ import { OrdersList } from '../components/OrdersList';
 export function Shipping(){
   const { shippingOrders } = useAdmin();
   return(
-    <Container classname="main">
+    <Container classname="main admin">
       <OrdersList title="Para entrega" orders={shippingOrders} />
       <NavBar />
     </Container>

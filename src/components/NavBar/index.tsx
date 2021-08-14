@@ -8,11 +8,13 @@ import { useAdmin } from '../../hooks/useAdmin';
 // Components
 import { Container } from '../Container';
 import './styles.scss';
+import { useAuth } from '../../hooks/useAuth';
 
 
 export function NavBar(){
   const history = useHistory();
   const { newOrders, shippingOrders } = useAdmin();
+  const { userAuth } = useAuth();
 
   return(
     <Container classname="navbar">
@@ -37,6 +39,10 @@ export function NavBar(){
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
         </div>
         <p>Editar Menu</p>
+      </div>
+      <div className="admin-image">
+        <img src={userAuth?.avatar} alt="avatar" />
+        <p>{userAuth?.name}</p>
       </div>
     </Container>
   )
