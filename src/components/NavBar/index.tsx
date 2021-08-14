@@ -5,9 +5,9 @@ import editIcon from '../../assets/images/editIcon.svg';
 // Hooks
 import { useHistory } from 'react-router-dom';
 import { useAdmin } from '../../hooks/useAdmin';
-
-import './styles.scss';
+// Components
 import { Container } from '../Container';
+import './styles.scss';
 
 
 export function NavBar(){
@@ -36,7 +36,7 @@ export function NavBar(){
         <div>
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
         </div>
-        <p>Editar</p>
+        <p>Editar Menu</p>
       </div>
     </Container>
   )

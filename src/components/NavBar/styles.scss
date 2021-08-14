@@ -45,3 +45,24 @@
 
   }
 }
+
+@media screen and (min-width: 500px){
+  .main {
+    position: relative;
+    
+    > div:nth-child(1) {
+      margin-left: 10%;
+    }
+
+    div.navbar {
+      width: 15%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      padding-top: 2rem;
+      justify-content: flex-start;
+      gap: 5rem;
+      flex-direction: column;
+    }
+  }
+}

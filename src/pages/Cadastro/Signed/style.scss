@@ -18,4 +18,15 @@
     color: #8f8f8f;
     //margin-bottom: 1rem;
   }
+
+  .logout {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
 }

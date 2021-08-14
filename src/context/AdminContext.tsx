@@ -9,34 +9,21 @@ import { conveteAddressToURL } from '../utils/conveteAddressToURL';
 // Database Connection
 import { database } from '../services/firebase';
 // Types
-import { ChildrenProps } from '../types/index';
+import { ChildrenProps, OrdersProps } from '../types/index';
 
 import Swal from 'sweetalert';
 
-type AdminOrdersProps = {
-  id: string;
-  name: string;
-  telephone: string;
-  cep: string;
-  street: string;
-  number: string;
-  neighborhood: string;
-  order: string[];
-  status: 'new' | 'shipping';
-  createdAt: number;
-  encodedAddress: string;
-}
 type AdminContextProps = {
-  newOrders: AdminOrdersProps[] | undefined;
-  shippingOrders: AdminOrdersProps[] | undefined;
-  getOrderDetails:(id:string)=>AdminOrdersProps | undefined;
+  newOrders: OrdersProps[] | undefined;
+  shippingOrders: OrdersProps[] | undefined;
+  getOrderDetails:(id:string)=>OrdersProps | undefined;
   setOrderToShipping:(id:string)=>void;
   endOrder:(id:string)=>void;
   handleMenu:(id:string)=>void;
   updateMenu:()=>void;
 }
 
-type FirebaseOrders = Record<string,AdminOrdersProps>;
+type FirebaseOrders = Record<string,OrdersProps>;
 
 const AdminContext = createContext({} as AdminContextProps);
 
@@ -46,8 +33,8 @@ function AdminContextProvider({children}:ChildrenProps){
   const history = useHistory();
   const { userAuth } = useAuth();
   const { menu, setMenu } = useOrder();
-  const [ newOrders, setNewOrders ] = useState<AdminOrdersProps[]>();
-  const [ shippingOrders, setShippingOrders ] = useState<AdminOrdersProps[]>();
+  const [ newOrders, setNewOrders ] = useState<OrdersProps[]>();
+  const [ shippingOrders, setShippingOrders ] = useState<OrdersProps[]>();
 
   
   function handleMenu(id:string){
@@ -58,8 +45,8 @@ function AdminContextProvider({children}:ChildrenProps){
 
   async function updateMenu(){
     const userResponse = await Swal('Deseja atualizar o menu?','',{buttons:['Voltar','Confirmar']});
-    userResponse && database.ref('menu')
-    .set(menu, err=>  err && console.log('Error'+err));
+    userResponse && 
+    database.ref('menu').set(menu, err=>  err && console.log('Error'+err));
     
   }
 
@@ -72,7 +59,7 @@ function AdminContextProvider({children}:ChildrenProps){
       isFirstLoad = true;
 
       const data:FirebaseOrders = snap.val()?? {};
-      const arrayOfOrders:AdminOrdersProps[] = Object.entries(data)?.map(([id,value])=>{
+      const arrayOfOrders:OrdersProps[] = Object.entries(data)?.map(([id,value])=>{
         
         return{
           ...value,

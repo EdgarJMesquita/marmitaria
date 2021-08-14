@@ -1,7 +1,7 @@
 import { Container } from '../../../components/Container';
 import { NavBar } from '../../../components/NavBar';
 import { useAdmin } from '../../../hooks/useAdmin';
-import { OrdersList } from '../components/Orders';
+import { OrdersList } from '../components/OrdersList';
 
 export function Shipping(){
   const { shippingOrders } = useAdmin();
@@ -12,7 +12,3 @@ export function Shipping(){
     </Container>
   )
 }
-/* <Container classname="">
-        <OrdersList title="Para entrega" orders={shippingOrders} />
-      </Container>
-      <Footer /> */

@@ -13,9 +13,8 @@ import { NewOrders } from './pages/Admin/NewOrders';
 import { Shipping } from './pages/Admin/Shipping';
 import { OrderDetails } from './pages/Admin/OrderDetails';
 import { Login } from './pages/Admin/Login';
-import { EditarMenu } from './pages/Admin/EditarMenu';
+import { EditMenu } from './pages/Admin/EditMenu';
 //import { NotFound } from './pages/NotFound';
-// Components
 
 import './styles/global.scss';
 
@@ -33,7 +32,7 @@ export default function App() {
                   <Route path="/admin/shipping" component={ Shipping }/>
                   <Route path="/admin/new-orders" component={ NewOrders }/>
                   <Route path="/admin/order-details/:orderId" component={ OrderDetails }/>
-                  <Route path="/admin/edit-menu" component={ EditarMenu }/>
+                  <Route path="/admin/edit-menu" component={ EditMenu }/>
                  {/*  <Route path="*" component={ NotFound }/> */}
                 </AdminContextProvider>
               </UserContextProvider>

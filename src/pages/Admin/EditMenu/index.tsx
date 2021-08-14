@@ -5,7 +5,7 @@ import availableIcon from '../../../assets/images/selected.svg';
 import { useAdmin } from "../../../hooks/useAdmin";
 import { Container } from "../../../components/Container";
 
-export function EditarMenu(){
+export function EditMenu(){
   const { menu } = useOrder();
   const { handleMenu, updateMenu } = useAdmin();
 

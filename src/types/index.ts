@@ -36,4 +36,6 @@ export type OrdersProps = {
   neighborhood: string;
   order: string[];
   status: 'new' | 'shipping';
-} | undefined;
+  encodedAddress: string;
+  createdAt: number;
+}

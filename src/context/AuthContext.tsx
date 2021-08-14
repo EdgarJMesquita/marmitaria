@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react';
 import { firebase, auth } from '../services/firebase';
 import { ChildrenProps } from '../types';
-
+import Swal from 'sweetalert';
 
 type UserProps = {
   id: string;
@@ -12,6 +12,7 @@ type UserProps = {
 type AuthContextProps = {
   userAuth: UserProps;
   signInWithGoogle: ()=>void;
+  signOut:()=>void;
 }
 
 const AuthContext = createContext({} as AuthContextProps);
@@ -34,6 +35,12 @@ function AuthContextProvider({children}:ChildrenProps){
         avatar: photoURL
       })
     }
+  }
+
+  function signOut(){
+    auth.signOut();
+    setUserAuth(undefined);
+    Swal('Você se desconectou','','success');
   }
   
   useEffect(() => {
@@ -60,7 +67,8 @@ function AuthContextProvider({children}:ChildrenProps){
   return(
     <AuthContext.Provider value={{
       userAuth,
-      signInWithGoogle
+      signInWithGoogle,
+      signOut
     }}>
     {children}
     </AuthContext.Provider>

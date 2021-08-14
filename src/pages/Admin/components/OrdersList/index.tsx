@@ -4,19 +4,7 @@ import { OrderPlaceholder } from './Placeholder';
 import { Container } from '../../../../components/Container';
 // Assets
 import './style.scss';
-
-type OrdersProps = {
-  id: string;
-  name: string;
-  telephone: string;
-  cep: string; 
-  street: string;
-  number: string;
-  neighborhood: string;
-  order: string[];
-  status: 'new' | 'shipping';
-  createdAt: number;
-}
+import { OrdersProps } from '../../../../types';
 
 type BananaProps = {
   orders: OrdersProps[] | undefined;
