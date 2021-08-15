@@ -23,7 +23,7 @@ export function UserAddress({address}:UserAddressProps){
 
   return(
     <>
-      <h1>Endereço</h1>
+      <h1>Endereço / Contato</h1>
       <ul>
         <li>{address?.name}</li>
         <li>

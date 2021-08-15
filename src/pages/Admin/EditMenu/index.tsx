@@ -12,7 +12,7 @@ export function EditMenu(){
   return(
     <Container classname="main">
       <Container classname="orders">
-        <h1>Cardápio</h1>
+        <h1>Menu</h1>
         <ul>
           {menu.map(item=>{
             return(

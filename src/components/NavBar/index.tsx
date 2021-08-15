@@ -21,7 +21,7 @@ export function NavBar(){
       <div onClick={()=>history.push('/admin/new-orders')} title="Novos pedidos">
         <div>
           <img src={newOrderIcon} alt="novos pedidos" />
-          { newOrders && newOrders?.length > 0 && <span>{newOrders?.length}</span>}
+          <span>{newOrders?.length}</span>
         </div>
         <p>Novos pedidos</p>
       </div>
@@ -29,7 +29,7 @@ export function NavBar(){
       <div onClick={()=>history.push('/admin/shipping')} title="Pedidos pronto para entrega">
         <div>
           <img src={shippingIcon} alt="pedidos prontos para entrega" />
-          { shippingOrders && shippingOrders?.length > 0 && <span>{shippingOrders?.length}</span>}
+          <span>{shippingOrders?.length}</span>
         </div>
         <p>Para entrega</p>
       </div>

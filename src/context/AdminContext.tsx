@@ -72,7 +72,6 @@ function AdminContextProvider({children}:ChildrenProps){
       const _shippingOrders = arrayOfOrders.filter(({status})=>status==='shipping');
       setNewOrders(_newOrders);                                                                                                                                                                                                                                                                          
       setShippingOrders(_shippingOrders); 
-      console.log(arrayOfOrders);
     });
     
     ordersRef.on('child_added',(snap)=>{

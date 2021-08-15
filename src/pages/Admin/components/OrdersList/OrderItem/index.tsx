@@ -28,7 +28,7 @@ export function OrderItem({order}:OrderItemProps){
 
       setWaitTime(formatPassedTime(order.createdAt));
       
-    }, 60000) // 1 minuto
+    }, 60000) // 1 minuto intervalo
 
     return ()=>{
       mounted = false;
@@ -36,7 +36,7 @@ export function OrderItem({order}:OrderItemProps){
   }, [order.createdAt])
 
   return(
-    <li onClick={()=>history.push(`/admin/order-details/${order?.id}`)} key={order?.id} title={`Abrir pedido ${order?.name}`} >
+    <li onClick={()=>history.push(`/admin/order-details/${order?.id}`)} title={`Abrir pedido ${order?.name}`} >
       <span>{order?.name}</span>
       <span>{waitime}</span>
       <img src={showDetailsIcon} alt="Mostrar detalhes" />
