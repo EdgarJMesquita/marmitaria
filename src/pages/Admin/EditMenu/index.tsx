@@ -19,7 +19,7 @@ export function EditMenu(){
               <li onClick={()=>handleMenu(item.id)} key={item.id} className="edit-menu"> 
                 {item.isAvailable && <img src={availableIcon} alt="available" />}
                 {!item.isAvailable && <img src={notAvailableIcon} alt="not available" />}
-                <span>{item.content}</span>
+                <p>{item.content}</p>
               </li>
               )
             })}
@@ -30,21 +30,3 @@ export function EditMenu(){
     </Container>
   )
 }
-/* <Container>
-        <Container classname="orders">
-          <h3>Cardápio</h3>
-          <ul>
-          {menu.map(item=>{
-            return(
-              <li onClick={()=>handleMenu(item.id)} key={item.id} className="edit-menu"> 
-                {item.isAvailable && <img src={availableIcon} alt="available" />}
-                {!item.isAvailable && <img src={notAvailableIcon} alt="not available" />}
-                <span>{item.content}</span>
-              </li>
-              )
-            })}
-            <li onClick={updateMenu} className="button">Atualizar menu</li>
-          </ul>
-        </Container>
-      </Container>
-      <Footer /> */

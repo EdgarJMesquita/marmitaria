@@ -59,14 +59,11 @@ function AdminContextProvider({children}:ChildrenProps){
       isFirstLoad = true;
 
       const data:FirebaseOrders = snap.val()?? {};
-      const arrayOfOrders:OrdersProps[] = Object.entries(data)?.map(([id,value])=>{
-        
-        return{
-          ...value,
-          encodedAddress: conveteAddressToURL(value),
-          id
-        }
-      });
+      const arrayOfOrders:OrdersProps[] = Object.entries(data)?.map(([id,value])=>({
+        ...value,
+        encodedAddress: conveteAddressToURL(value),
+        id
+      }));
       
       const _newOrders = arrayOfOrders.filter(({status})=>status==='new');
       const _shippingOrders = arrayOfOrders.filter(({status})=>status==='shipping');
@@ -85,15 +82,17 @@ function AdminContextProvider({children}:ChildrenProps){
     }
   }, [userAuth])
 
+/*   function getOrderDetails(id:string){(
+    newOrders && shippingOrders && [...newOrders,...shippingOrders].find(order=>order.id === id)
+  )} */
+  
   function getOrderDetails(id:string){
     if(newOrders && shippingOrders){
       return [...newOrders,...shippingOrders].find(order=>order.id === id);
-     
     }
   }
 
   function setOrderToShipping(id:string){
-
     database.ref(`orders/${id}`)
     .update({
       status: 'shipping'
@@ -119,8 +118,7 @@ function AdminContextProvider({children}:ChildrenProps){
 
       })
     .catch(err=>{
-      Swal('Algo deu errado','','error', 'Tente novamente');
-      console.log(err);
+      Swal('Algo deu errado','Tente novamente','error');
     })
   }
 
