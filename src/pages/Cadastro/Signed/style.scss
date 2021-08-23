@@ -30,3 +30,9 @@
     }
   }
 }
+
+@media screen and (min-width: 500px){
+  .user-logged {
+    display: none;
+  }
+}

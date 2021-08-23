@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { OrdersProps } from "../../../../../types";
 import showDetailsIcon from '../../../../../assets/images/showDetailsIcon.svg';
+import { useAdmin } from "../../../../../hooks/useAdmin";
 
 type OrderItemProps = {
   order: OrdersProps;
@@ -10,6 +11,7 @@ type OrderItemProps = {
 export function OrderItem({order}:OrderItemProps){
   const history = useHistory();
   const [ waitime, setWaitTime ] = useState('');
+  const { selectOrderToShowDetails } = useAdmin();
 
   function formatPassedTime(time:number){
     const timePassed = (Date.now() - time) / 1000; // Eliminando os miliseconds
@@ -35,8 +37,14 @@ export function OrderItem({order}:OrderItemProps){
     }
   }, [order.createdAt])
 
+
+  function handleSelectOrder(){
+    selectOrderToShowDetails(order.id)
+    history.push('/admin/order-details');
+  }
+
   return(
-    <li onClick={()=>history.push(`/admin/order-details/${order?.id}`)} title={`Abrir pedido ${order?.name}`} >
+    <li onClick={handleSelectOrder} title={`Abrir pedido ${order?.name}`} >
       <span>{order?.name}</span>
       <span>{waitime}</span>
       <img src={showDetailsIcon} alt="Mostrar detalhes" />

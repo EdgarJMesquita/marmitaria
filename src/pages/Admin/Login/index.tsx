@@ -25,13 +25,30 @@ export function Login(){
     
   }, [userAuth, history])
 
-  
+  function handleSignInWithGoogle(){
+    if(userAuth){
+      if(userAuth){
+        database.ref('checkPermission/uga').update({uga:'buga'},(err)=>{
+          if(!err){
+            history.push('/admin/new-orders');
+          }else{
+            history.push('/');
+            console.log(err);
+          }
+        })
+      }
+      
+    }
+    else{
+      signInWithGoogle();
+    }
+  }
 
   return(
     <Container classname="main">
       <Container classname="admin-login">
         <h3>Efetue o Login para continuar</h3>
-        <button className="google-btn" onClick={signInWithGoogle} >
+        <button className="google-btn" onClick={handleSignInWithGoogle} >
           <img src={googleLogo} alt="google logo" />
           <span>Login com Google</span>
         </button>

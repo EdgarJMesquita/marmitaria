@@ -4,18 +4,18 @@ import { Menu } from './Menu';
 //Hooks
 import { useOrder } from '../../hooks/useOrder';
 import { Container } from '../../components/Container';
+import { DesktopHeader } from '../../components/DesktopHeader';
 
 export function Home(){
   const { menu } = useOrder();
 
   return(
-    <Container classname="main">
-      <Menu menu={menu}/>
-      <Basket />
-    </Container>
+    <>
+      <Container classname="main">
+        <DesktopHeader />
+        <Menu menu={menu}/>
+        <Basket />
+      </Container>
+    </>
   )
 }
- /* <Container>
-        <Menu menu={menu}/>
-      </Container>
-      <Basket /> */

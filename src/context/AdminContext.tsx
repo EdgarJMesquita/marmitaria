@@ -16,7 +16,8 @@ import Swal from 'sweetalert';
 type AdminContextProps = {
   newOrders: OrdersProps[] | undefined;
   shippingOrders: OrdersProps[] | undefined;
-  getOrderDetails:(id:string)=>OrdersProps | undefined;
+  selectedOrder: OrdersProps | undefined;
+  selectOrderToShowDetails:(id:string)=>void;
   setOrderToShipping:(id:string)=>void;
   endOrder:(id:string)=>void;
   handleMenu:(id:string)=>void;
@@ -35,6 +36,7 @@ function AdminContextProvider({children}:ChildrenProps){
   const { menu, setMenu } = useOrder();
   const [ newOrders, setNewOrders ] = useState<OrdersProps[]>();
   const [ shippingOrders, setShippingOrders ] = useState<OrdersProps[]>();
+  const [ selectedOrder, setSelectedOrder ] = useState<OrdersProps>();
 
   
   function handleMenu(id:string){
@@ -86,9 +88,10 @@ function AdminContextProvider({children}:ChildrenProps){
     newOrders && shippingOrders && [...newOrders,...shippingOrders].find(order=>order.id === id)
   )} */
   
-  function getOrderDetails(id:string){
+  function selectOrderToShowDetails(id:string){
     if(newOrders && shippingOrders){
-      return [...newOrders,...shippingOrders].find(order=>order.id === id);
+       setSelectedOrder([...newOrders,...shippingOrders].find(order=>order.id === id)) 
+      /* return [...newOrders,...shippingOrders].find(order=>order.id === id); */
     }
   }
 
@@ -126,7 +129,8 @@ function AdminContextProvider({children}:ChildrenProps){
     <AdminContext.Provider value={{
       newOrders,
       shippingOrders,
-      getOrderDetails,
+      selectedOrder,
+      selectOrderToShowDetails,
       setOrderToShipping,
       endOrder,
       handleMenu,

@@ -1,0 +1,16 @@
+
+header {
+  background-color: #ffe194;
+  padding: 0 10%;
+  color: white;
+  box-shadow: 0 5px 5px rgba(0, 0, 0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+  }
+}

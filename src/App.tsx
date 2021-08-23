@@ -31,7 +31,7 @@ export default function App() {
                   <Route path="/admin" exact component={ Login }/>
                   <Route path="/admin/shipping" component={ Shipping }/>
                   <Route path="/admin/new-orders" component={ NewOrders }/>
-                  <Route path="/admin/order-details/:orderId" component={ OrderDetails }/>
+                  <Route path="/admin/order-details" component={ OrderDetails }/>
                   <Route path="/admin/edit-menu" component={ EditMenu }/>
                  {/*  <Route path="*" component={ NotFound }/> */}
                 </AdminContextProvider>

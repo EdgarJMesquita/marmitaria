@@ -17,7 +17,7 @@ export function NavBar(){
   const { userAuth } = useAuth();
 
   return(
-    <Container classname="navbar">
+    <nav className="navbar">
       <div onClick={()=>history.push('/admin/new-orders')} title="Novos pedidos">
         <div>
           <img src={newOrderIcon} alt="novos pedidos" />
@@ -44,6 +44,6 @@ export function NavBar(){
         <img src={userAuth?.avatar} alt="avatar" />
         <p>{userAuth?.name}</p>
       </div>
-    </Container>
+    </nav>
   )
 }

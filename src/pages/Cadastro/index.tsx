@@ -8,26 +8,20 @@ import { GoBackLink } from '../../components/GoBackLink';
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
 import { Container } from '../../components/Container';
+import { DesktopHeader } from '../../components/DesktopHeader';
 
 export function Cadastro(){
   const { userAuth } = useAuth();
 
   return(
-      <Container classname="main">
-        <Container>
-          {!userAuth && <SignIn/>}
-          {userAuth && <Signed/>}
-          <Form />
+    <Container classname="main">
+      <DesktopHeader />
+      <Container classname="cadastro">
+        {!userAuth && <SignIn/>}
+        <Form />
         <GoBackLink />
-        </Container>
-        <Basket />
       </Container>
+      <Basket />
+    </Container>
   )
 }
-/* <Container classname="cadastro">
-        <GoBackLink />
-        {!userAuth && <SignIn/>}
-        {userAuth && <Signed/>}
-        <Form />
-      </Container>
-      <Basket /> */

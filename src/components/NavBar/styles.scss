@@ -1,5 +1,5 @@
 
-.navbar {
+nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -52,12 +52,14 @@
     position: relative;
 
     .orders, .order-details {
-      margin-left: 17%;
+      margin-left: 10rem;
+      
     }
 
-    div.navbar {
-      width: 17%;
-      height: 100%;
+    nav.navbar {
+      width: 10rem;
+      margin-top: 4.6rem;
+      height: 90%;
       position: absolute;
       top: 0;
       padding-top: 1rem;
@@ -92,3 +94,4 @@
     }
   }
 }
+

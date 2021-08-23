@@ -37,10 +37,14 @@ function AuthContextProvider({children}:ChildrenProps){
     }
   }
 
-  function signOut(){
-    auth.signOut();
-    setUserAuth(undefined);
-    Swal('Você se desconectou','','success');
+  async function signOut(){
+    const res = await Swal('Deseja mesmo deslogar?','Você não será capaz de guardar seus dados','warning', {buttons:['Voltar','Confirmar']});
+    if(res){
+      auth.signOut();
+      setUserAuth(undefined);
+      Swal('Você se desconectou','','success');
+    }
+
   }
   
   useEffect(() => {

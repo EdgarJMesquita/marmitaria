@@ -25,7 +25,7 @@ html, body, body > div {
   display: flex;
   flex-direction: column;
 
-  > div:nth-child(1) {
+  > div {
     position: relative;
     padding: 1rem;
     //height: 88%;
@@ -34,8 +34,8 @@ html, body, body > div {
     
   }
   
-  .navbar, .basket {
-    height: 12%; 
+  nav, .basket, header {
+    height: 10%; 
   }
 
   h1 {
@@ -57,25 +57,13 @@ html, body, body > div {
 
 @media screen and (min-width: 500px){
   .main {
-    height: 98%;
-    width: 50rem;
-    margin: 0.5rem auto;
     overflow: hidden;
-    box-shadow: 0 10px 10px rgba(0, 0, 0,0.1);
-    border-radius: 10px;
-    border: 0.5px solid #d3d3d8;
 
-    > div:nth-child(1) {
-      padding: 3rem 4rem 1rem;
-    
-      &.menu {
-        padding: 3rem 10rem;
-      }
+    .menu, .cadastro {
+      padding: 1rem 30%;
 
-      form {
-        padding: 0 7rem;
-      }
     }
+
   }
  
   html {

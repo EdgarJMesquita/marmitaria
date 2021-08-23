@@ -5,6 +5,7 @@ import { UserAddress } from './components/UserAddress';
 import { Container } from '../../../components/Container';
 import { Button } from './components/Button';
 import { GoBackLink } from '../../../components/GoBackLink';
+import { DesktopHeader } from '../../../components/DesktopHeader';
 // Customs Hooks
 import { useAdmin } from '../../../hooks/useAdmin';
 
@@ -18,18 +19,18 @@ type ParamsProps = {
   }
 }
 
-export function OrderDetails({match}:ParamsProps){
-  const { params:{orderId}} = match;  
-  const { getOrderDetails } = useAdmin();
-  const currentOrder = getOrderDetails(orderId); 
+export function OrderDetails(){
+  const { selectedOrder } = useAdmin();
+  //const currentOrder = getOrderDetails(orderId); 
 
   return(
     <Container classname="main">
+      <DesktopHeader />
       <Container classname="order-details">
         <GoBackLink />
-        <OrderItens itens={currentOrder?.order}/>
-        <UserAddress address={currentOrder}/>
-        <Button orderStatus={currentOrder?.status} orderId={orderId}/>
+        <OrderItens itens={selectedOrder?.order}/>
+        <UserAddress address={selectedOrder}/>
+        <Button orderStatus={selectedOrder?.status} orderId={selectedOrder?.id}/>
       </Container>
       <NavBar />
     </Container>
