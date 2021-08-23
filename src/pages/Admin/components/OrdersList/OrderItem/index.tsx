@@ -39,8 +39,8 @@ export function OrderItem({order}:OrderItemProps){
 
 
   function handleSelectOrder(){
-    selectOrderToShowDetails(order.id)
-    history.push('/admin/order-details');
+    selectOrderToShowDetails(order.id);
+    window.screen.availWidth < 1000 && history.push('/admin/order-details');
   }
 
   return(

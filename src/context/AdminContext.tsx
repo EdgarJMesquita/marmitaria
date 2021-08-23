@@ -88,41 +88,66 @@ function AdminContextProvider({children}:ChildrenProps){
     newOrders && shippingOrders && [...newOrders,...shippingOrders].find(order=>order.id === id)
   )} */
   
-  function selectOrderToShowDetails(id:string){
+  function selectOrderToShowDetails(id:string|''){
+    if(!id){
+      setSelectedOrder(undefined);
+    }
     if(newOrders && shippingOrders){
        setSelectedOrder([...newOrders,...shippingOrders].find(order=>order.id === id)) 
       /* return [...newOrders,...shippingOrders].find(order=>order.id === id); */
     }
   }
 
-  function setOrderToShipping(id:string){
-    database.ref(`orders/${id}`)
+  async function setOrderToShipping(id:string){
+    
+    try {
+      await database.ref(`orders/${id}`)
+      .update({ status: 'shipping' })
+      
+      history.push('/admin/new-orders');
+      selectOrderToShowDetails('');
+      
+    } catch (err) {
+      Swal('Algo deu errado', 'Tente novamente', 'error');
+      console.log(err);
+      
+    }
+   /*  database.ref(`orders/${id}`)
     .update({
       status: 'shipping'
-
     })
     .then(()=>{
       history.push('/admin/new-orders');
-      
-    })
+      selectOrderToShowDetails('');
+    })  
     .catch(err=>{
       Swal('Algo deu errado', 'Tente novamente', 'error');
       console.log(err);
-    })
-
+    }) */
   }
 
-  function endOrder(id:string){
-    database.ref(`orders/${id}`)
-    .remove()
+  async function endOrder(id:string){
+    
+    try {
+      await database.ref(`orders/${id}`).remove()
+      Swal('Pedido entregue com sucesso','','success', { timer:2000 });
+      history.push('/admin/shipping');
+      selectOrderToShowDetails('');
+      
+    } catch (error) {
+      Swal('Algo deu errado','Tente novamente','error');
+      
+    }
+   /*  database.ref(`orders/${id}`).remove()
     .then(()=>{
       Swal('Pedido entregue com sucesso','','success', { timer:2000 });
       history.push('/admin/shipping');
+      selectOrderToShowDetails('');
 
       })
     .catch(err=>{
       Swal('Algo deu errado','Tente novamente','error');
-    })
+    }) */
   }
 
   return(

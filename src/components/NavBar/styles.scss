@@ -52,12 +52,12 @@ nav {
     position: relative;
 
     .orders, .order-details {
-      margin-left: 10rem;
+      margin-left: 8rem;
       
     }
 
     nav.navbar {
-      width: 10rem;
+      width: 8rem;
       margin-top: 4.6rem;
       height: 90%;
       position: absolute;
@@ -81,15 +81,6 @@ nav {
           background-color: #F9E2A8;
         }
 
-        &.admin-image{
-          margin-top: auto;
-
-          img {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-          }
-        }
       }
     }
   }

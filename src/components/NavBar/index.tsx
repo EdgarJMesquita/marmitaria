@@ -6,22 +6,19 @@ import editIcon from '../../assets/images/editIcon.svg';
 import { useHistory } from 'react-router-dom';
 import { useAdmin } from '../../hooks/useAdmin';
 // Components
-import { Container } from '../Container';
 import './styles.scss';
-import { useAuth } from '../../hooks/useAuth';
 
 
 export function NavBar(){
   const history = useHistory();
   const { newOrders, shippingOrders } = useAdmin();
-  const { userAuth } = useAuth();
 
   return(
     <nav className="navbar">
       <div onClick={()=>history.push('/admin/new-orders')} title="Novos pedidos">
         <div>
           <img src={newOrderIcon} alt="novos pedidos" />
-          <span>{newOrders?.length}</span>
+          <span>{newOrders? newOrders.length:0}</span>
         </div>
         <p>Novos pedidos</p>
       </div>
@@ -29,7 +26,7 @@ export function NavBar(){
       <div onClick={()=>history.push('/admin/shipping')} title="Pedidos pronto para entrega">
         <div>
           <img src={shippingIcon} alt="pedidos prontos para entrega" />
-          <span>{shippingOrders?.length}</span>
+          <span>{shippingOrders? shippingOrders.length:0}</span>
         </div>
         <p>Para entrega</p>
       </div>
@@ -39,10 +36,6 @@ export function NavBar(){
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
         </div>
         <p>Editar Menu</p>
-      </div>
-      <div className="admin-image">
-        <img src={userAuth?.avatar} alt="avatar" />
-        <p>{userAuth?.name}</p>
       </div>
     </nav>
   )

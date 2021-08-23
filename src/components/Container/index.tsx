@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 type ContainerProps = {
-  children: ReactNode;
+  children?: ReactNode;
   classname?: string | undefined;
 }
 

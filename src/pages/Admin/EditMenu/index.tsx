@@ -4,6 +4,7 @@ import notAvailableIcon from '../../../assets/images/close.svg';
 import availableIcon from '../../../assets/images/selected.svg';
 import { useAdmin } from "../../../hooks/useAdmin";
 import { Container } from "../../../components/Container";
+import { DesktopHeader } from "../../../components/DesktopHeader";
 
 export function EditMenu(){
   const { menu } = useOrder();
@@ -11,20 +12,24 @@ export function EditMenu(){
 
   return(
     <Container classname="main">
-      <Container classname="orders">
-        <h1>Menu</h1>
-        <ul>
-          {menu.map(item=>{
-            return(
-              <li onClick={()=>handleMenu(item.id)} key={item.id} className="edit-menu"> 
-                {item.isAvailable && <img src={availableIcon} alt="available" />}
-                {!item.isAvailable && <img src={notAvailableIcon} alt="not available" />}
-                <p>{item.content}</p>
-              </li>
-              )
-            })}
-          </ul>
-          <button onClick={updateMenu}>Atualizar menu</button>
+      <DesktopHeader />
+      <Container classname="desktop">
+        <Container classname="orders">
+          <h1>Menu</h1>
+          <ul>
+            {menu.map(item=>{
+              return(
+                <li onClick={()=>handleMenu(item.id)} key={item.id} className="edit-menu"> 
+                  {item.isAvailable && <img src={availableIcon} alt="available" />}
+                  {!item.isAvailable && <img src={notAvailableIcon} alt="not available" />}
+                  <p>{item.content}</p>
+                </li>
+                )
+              })}
+            </ul>
+            <button onClick={updateMenu}>Atualizar menu</button>
+          </Container>
+          <Container />
         </Container>
         <NavBar />
     </Container>

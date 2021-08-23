@@ -25,10 +25,6 @@
       overflow: hidden;
     }
 
-    /* span:nth-child(2){
-      width: 7rem;
-    } */
-
     &#order-placeholder {
       height: 4rem;
       background-color: var(--whitePlaceholder);
@@ -47,10 +43,17 @@
       }
     }
   }
+ /*  .order-details {
+    display: none;
+  } */
 }
 
 @keyframes blink {
   0% { opacity: 1;}
   50% { opacity: 0.5;}
   100% { opacity: 1;}
+}
+
+@media screen and (min-width:500px){
+
 }

@@ -63,10 +63,28 @@ html, body, body > div {
       padding: 1rem 30%;
 
     }
-
   }
  
   html {
     font-size: 110%;
+  }
+}
+
+@media screen and (min-width: 1000px){
+  .desktop {
+    display: flex;
+    justify-content: space-around;
+
+    > div {
+      width: 50%;
+      padding: 1rem;
+
+    }
+    
+    >.aside-order-details {
+      border-left: 1px solid #ddd;
+      display: block;
+      overflow-y: auto;
+    }
   }
 }
