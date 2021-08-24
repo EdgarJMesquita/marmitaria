@@ -4,7 +4,7 @@ import { Menu } from './Menu';
 //Hooks
 import { useOrder } from '../../hooks/useOrder';
 import { Container } from '../../components/Container';
-import { DesktopHeader } from '../../components/DesktopHeader';
+import { Header } from '../../components/Header';
 
 export function Home(){
   const { menu } = useOrder();
@@ -12,7 +12,7 @@ export function Home(){
   return(
     <>
       <Container classname="main">
-        <DesktopHeader />
+        <Header />
         <Menu menu={menu}/>
         <Basket />
       </Container>

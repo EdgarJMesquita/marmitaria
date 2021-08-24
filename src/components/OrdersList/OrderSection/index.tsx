@@ -1,4 +1,4 @@
-import { OrdersProps } from "../../../../../types";
+import { OrdersProps } from "../../../types";
 import { OrderItem } from "../OrderItem";
 
 type Banana = {

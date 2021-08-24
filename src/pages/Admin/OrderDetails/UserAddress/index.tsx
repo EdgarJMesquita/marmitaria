@@ -1,5 +1,5 @@
-import whatsAppIcon from '../../../../../assets/images/whatsapp.svg'; 
-import googleMapsIcon from '../../../../../assets/images/googleMapsIcon.svg';
+import whatsAppIcon from '../../../../assets/images/whatsapp.svg'; 
+import googleMapsIcon from '../../../../assets/images/googleMapsIcon.svg';
 
 type AdminOrdersProps = {
   name: string;
@@ -10,6 +10,7 @@ type AdminOrdersProps = {
   neighborhood: string;
   encodedAddress: string;
 }
+
 
 type UserAddressProps = {
   address: AdminOrdersProps | undefined;
@@ -23,7 +24,7 @@ export function UserAddress({address}:UserAddressProps){
 
   return(
     <>
-      <h1>Endereço / Contato</h1>
+      <h1>Endereço</h1>
       <ul>
         <li>{address?.name}</li>
         <li>

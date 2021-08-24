@@ -1,4 +1,4 @@
-import { useAdmin } from "../../../../../hooks/useAdmin"
+import { useAdmin } from "../../../../hooks/useAdmin";
 
 interface ButtonProps {
   orderStatus: 'new' | 'shipping' | undefined;
@@ -22,9 +22,9 @@ export function Button({orderStatus, orderId}:ButtonProps){
   return(
     <>
       {orderStatus==='new'?(
-        <button onClick={()=>handleOrderToShipping(orderId)}>Pedido pronto para entrega</button>
+        <button onClick={()=>handleOrderToShipping(orderId)}>Separar para entrega</button>
         ):(
-        <button onClick={()=>handleEndOrder(orderId)}>Pedido entregue</button>
+        <button onClick={()=>handleEndOrder(orderId)}>Finalizar entrega</button>
         )}
     </>
   )

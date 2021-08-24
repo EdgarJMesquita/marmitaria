@@ -1,43 +1,88 @@
 .aside-order-details {
+
   display: none;
+  position: relative;
 
-  ul {
-    list-style-type: none;
-    border-radius: 10px;
-    background-color: var(--white);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 4rem;
-      color: var(--textColor);
-      font-weight: 300;
-      font-size: 1.3rem;
-      padding: 1rem;
-
-      a {
-        display: flex;
-        align-items: center;
-        color: inherit;
-      }
+  section {
+    display: flex;
+    justify-content: space-between;
+    height: 89%;
+    overflow: auto;
+    padding-right: 1rem;
+    
+    > div {
+      width: 49%;
       
-      img {
-        width: 2rem;
-        height: 2rem;
-        margin-left: 0.5rem;
-
-        &.map-icon {
-          width: 1.5rem;
-          height: 1.5rem;
+      ul {
+        list-style-type: none;
+        border-radius: 10px;
+        background-color: var(--white);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 4rem;
+          color: var(--textColor);
+          font-weight: 300;
+          font-size: 1.3rem;
+          padding: 1rem 1.5rem;
+          
+          a {
+            display: flex;
+            align-items: center;
+            color: inherit;
+          }
+          
+          img {
+            width: 2rem;
+            height: 2rem;
+            margin-left: 0.5rem;
+            
+            &.map-icon {
+              width: 1.5rem;
+              height: 1.5rem;
+            }
+          }
+        }
+        
+        li + li {
+          border-top: 1px dotted #d3d3d8;
         }
       }
     }
+  }
 
-    li + li {
-      border-top: 1px dotted #d3d3d8;
+  .close-btn {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    padding: 0.6rem;
+    color: var(--textColor);
+    font-size: 1.3rem;
+    font-weight: 300;
+    cursor: pointer;
+  }
+
+  .aside-order-details-placeholder{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+
+    img {
+      height: 7rem;
+      width: auto;
     }
+  }
+
+  button {
+    margin-left: 50%;
+    width: 50% !important;
   }
 }

@@ -1,6 +1,6 @@
-import { Container } from "../../../../../components/Container";
-import { GoBackLink } from "../../../../../components/GoBackLink";
-import { useAdmin } from "../../../../../hooks/useAdmin";
+import { Container } from "../../../../components/Container";
+import { GoBackLink } from "../../../../components/GoBackLink";
+import { useAdmin } from "../../../../hooks/useAdmin";
 import { Button } from "../Button";
 import { OrderItens } from "../OrderItens";
 import { UserAddress } from "../UserAddress";

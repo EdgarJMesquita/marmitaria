@@ -1,4 +1,6 @@
 .orders {
+  overflow: auto;
+
   li {
     display: flex;
     justify-content: space-between;
@@ -17,6 +19,11 @@
     border-radius: 10px;
     background-color: var(--white);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+    transition: transform 0.2s;
+    &:hover {
+      transform: translateX(-2%);
+    }
 
     span {
       //max-width: 50%;

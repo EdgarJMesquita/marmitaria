@@ -1,8 +1,8 @@
 // Components
 import { NavBar } from '../../../components/NavBar';
 import { Container } from '../../../components/Container';
-import { DesktopHeader } from '../../../components/DesktopHeader';
-import { OrderDetailsList } from './components/OrderDetailsList';
+import { Header } from '../../../components/Header';
+import { OrderDetailsList } from './OrderDetailsList';
 // Customs Hooks
 import './style.scss';
 
@@ -11,7 +11,7 @@ import './style.scss';
 export function OrderDetails(){
   return(
     <Container classname="main">
-      <DesktopHeader />
+      <Header />
       <OrderDetailsList />
       <NavBar />
     </Container>

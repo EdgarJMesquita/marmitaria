@@ -6,14 +6,14 @@ import { GoBackLink } from '../../components/GoBackLink';
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
 import { Container } from '../../components/Container';
-import { DesktopHeader } from '../../components/DesktopHeader';
+import { Header } from '../../components/Header';
 
 export function Cadastro(){
   const { userAuth } = useAuth();
 
   return(
     <Container classname="main">
-      <DesktopHeader />
+      <Header />
       <Container classname="cadastro">
         {!userAuth && <SignIn/>}
         <Form />

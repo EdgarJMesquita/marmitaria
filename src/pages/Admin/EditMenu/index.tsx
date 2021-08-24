@@ -1,10 +1,11 @@
 import { NavBar } from "../../../components/NavBar";
 import { useOrder } from "../../../hooks/useOrder";
-import notAvailableIcon from '../../../assets/images/close.svg';
-import availableIcon from '../../../assets/images/selected.svg';
 import { useAdmin } from "../../../hooks/useAdmin";
 import { Container } from "../../../components/Container";
-import { DesktopHeader } from "../../../components/DesktopHeader";
+import { Header } from "../../../components/Header";
+import availableIcon from '../../../assets/images/selected.svg';
+import notAvailableIcon from '../../../assets/images/close.svg';
+import { SideOrderDetails } from "../../../components/SideOrderDetails";
 
 export function EditMenu(){
   const { menu } = useOrder();
@@ -12,10 +13,10 @@ export function EditMenu(){
 
   return(
     <Container classname="main">
-      <DesktopHeader />
+      <Header />
       <Container classname="desktop">
         <Container classname="orders">
-          <h1>Menu</h1>
+          <h1>Edite o menu</h1>
           <ul>
             {menu.map(item=>{
               return(
@@ -29,7 +30,7 @@ export function EditMenu(){
             </ul>
             <button onClick={updateMenu}>Atualizar menu</button>
           </Container>
-          <Container />
+          <SideOrderDetails />
         </Container>
         <NavBar />
     </Container>

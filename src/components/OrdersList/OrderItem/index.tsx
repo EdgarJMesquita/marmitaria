@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { OrdersProps } from "../../../../../types";
-import showDetailsIcon from '../../../../../assets/images/showDetailsIcon.svg';
-import { useAdmin } from "../../../../../hooks/useAdmin";
+import { OrdersProps } from "../../../types";
+import showDetailsIcon from '../../../assets/images/showDetailsIcon.svg';
+import { useAdmin } from "../../../hooks/useAdmin";
 
 type OrderItemProps = {
   order: OrdersProps;

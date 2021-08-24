@@ -1,9 +1,9 @@
 import { Container } from '../../../components/Container';
-import { DesktopHeader } from '../../../components/DesktopHeader';
+import { Header } from '../../../components/Header';
 import { NavBar } from '../../../components/NavBar';
 import { SideOrderDetails } from '../../../components/SideOrderDetails';
 import { useAdmin } from '../../../hooks/useAdmin';
-import { OrdersList } from '../components/OrdersList';
+import { OrdersList } from '../../../components/OrdersList';
 
 
 export function NewOrders(){
@@ -11,7 +11,7 @@ export function NewOrders(){
 
   return(
     <Container classname="main">
-      <DesktopHeader />
+      <Header />
       <div className="desktop">
         <OrdersList title="Novos pedidos" orders={newOrders}/>
         <SideOrderDetails />

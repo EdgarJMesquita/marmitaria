@@ -1,8 +1,8 @@
 // Components
 import { OrdersSection } from './OrderSection';
 import { OrderPlaceholder } from './Placeholder';
-import { Container } from '../../../../components/Container';
-import { OrdersProps } from '../../../../types';
+import { Container } from '../Container';
+import { OrdersProps } from '../../types';
 // Assets
 import './style.scss';
 
