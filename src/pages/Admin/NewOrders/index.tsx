@@ -4,10 +4,20 @@ import { NavBar } from '../../../components/NavBar';
 import { SideOrderDetails } from '../../../components/SideOrderDetails';
 import { useAdmin } from '../../../hooks/useAdmin';
 import { OrdersList } from '../../../components/OrdersList';
+import { useEffect } from 'react';
 
 
 export function NewOrders(){
-  const { newOrders } = useAdmin();
+  const { newOrders, setSelectedPage } = useAdmin();
+
+  useEffect(() => {
+    let isFirstLoad = true;
+    isFirstLoad && setSelectedPage('new-orders');
+    
+    return () => {
+      isFirstLoad = false;  
+    }
+  }, [setSelectedPage]);
 
   return(
     <Container classname="main">

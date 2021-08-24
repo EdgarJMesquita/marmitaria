@@ -38,7 +38,7 @@ function AuthContextProvider({children}:ChildrenProps){
   }
 
   async function signOut(){
-    const res = await Swal('Deseja mesmo deslogar?','Você não será capaz de guardar seus dados','warning', {buttons:['Voltar','Confirmar']});
+    const res = await Swal('Deseja mesmo deslogar?','','warning', {buttons:['Voltar','Confirmar'],dangerMode:true});
     if(res){
       auth.signOut();
       setUserAuth(undefined);

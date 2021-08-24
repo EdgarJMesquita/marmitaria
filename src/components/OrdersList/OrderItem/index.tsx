@@ -15,9 +15,10 @@ export function OrderItem({order}:OrderItemProps){
 
   function formatPassedTime(time:number){
     const timePassed = (Date.now() - time) / 1000; // Eliminando os miliseconds
-    const days = Math.floor(timePassed / 86400 );
+    const days = Math.floor(timePassed / 86400);
     const hours = Math.floor(timePassed % 86400 / 3600);
     const minutes = Math.floor(timePassed % 3600 / 60);
+    
     return `${days > 0? days+'d':''} ${hours > 0? hours+'h':''} ${minutes}m`;
   }
 

@@ -11,6 +11,7 @@ body {
 }
 
 :root {
+  --main-color: #ffe194;
   --white: #fff;
   --headingColor: #4f4f4f;
   --textColor: #5a5858;
@@ -24,7 +25,7 @@ body {
 
   > div {
     position: relative;
-    padding: 1rem;
+    padding: 1rem 1rem 0;
     flex: 1;
     overflow-y: auto;
   }
@@ -49,6 +50,7 @@ body {
     border: none;
     color: #fff;
     cursor: pointer;
+    margin-bottom: 0.3rem;
 
     transition: filter 0.3s;
     
@@ -69,6 +71,10 @@ body {
  
   html {
     font-size: 120%;
+  }
+
+  .desktop {
+    padding-bottom: 0;
   }
 }
 

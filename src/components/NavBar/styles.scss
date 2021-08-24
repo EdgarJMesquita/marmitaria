@@ -3,17 +3,22 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #FFE194;
+  background-color: var(--main-color);
   
   div {
-    position: relative;
     cursor: pointer;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    &.selected {
+      background-color: #F9E2A8;
+      
+    }
+    
     > div {
+      position: relative;
+
 
       img {
         width: 1.5rem;
@@ -24,7 +29,9 @@ nav {
         position: absolute;
         bottom: 0.6rem;
         left: 1.9rem;
-        background-color: #FA8938;
+        background-color: #FEA0A3;
+        //background-color: #ffc532;
+        //background-color: #FA8938;
         color: #fff;
         font-size: 0.75rem;
         width: 1.2rem;
@@ -33,6 +40,18 @@ nav {
         display: flex;
         justify-content: center;
         align-items: center;
+        
+      }
+
+      .current-selected {
+        position: absolute;
+        top: 2.6rem;
+        left: 0.4.5rem;
+        background-color: #FEA0A3;
+       // background-color: #ffa15e;
+        height: 0.4rem;
+        width: 0.4rem;
+        border-radius: 50%;
       }
     }
 
@@ -40,6 +59,7 @@ nav {
       color: #ffffff;
       font-size: 0.75rem;
     }
+
   }
 }
 
@@ -60,7 +80,8 @@ nav {
       padding-top: 1rem;
       justify-content: flex-start;
       flex-direction: column;
-      gap: 1rem;
+      gap: 4rem;
+      box-shadow: 5px 5px 5px #0000001a;
 
       > div {
         display: flex;
@@ -74,8 +95,17 @@ nav {
 
         &:hover {
           background-color: #F9E2A8;
-        }
 
+        }
+      }
+
+      .current-selected {
+        top: 1rem;
+        right: -2.6rem;
+        background-color: #FEA0A3;
+        height: 0.4rem;
+        width: 0.4rem;
+        border-radius: 50%;
       }
     }
   }

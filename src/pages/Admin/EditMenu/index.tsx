@@ -6,10 +6,21 @@ import { Header } from "../../../components/Header";
 import availableIcon from '../../../assets/images/selected.svg';
 import notAvailableIcon from '../../../assets/images/close.svg';
 import { SideOrderDetails } from "../../../components/SideOrderDetails";
+import { useEffect } from "react";
+import { OrderPlaceholder } from "../../../components/OrdersList/Placeholder";
 
 export function EditMenu(){
   const { menu } = useOrder();
-  const { handleMenu, updateMenu } = useAdmin();
+  const { handleMenu, updateMenu, setSelectedPage } = useAdmin();
+
+  useEffect(() => {
+    let isFirstLoad = true;
+    isFirstLoad && setSelectedPage('edit-menu');
+    
+    return () => {
+      isFirstLoad = false;  
+    }
+  }, [setSelectedPage]);
 
   return(
     <Container classname="main">
@@ -18,6 +29,7 @@ export function EditMenu(){
         <Container classname="orders">
           <h1>Edite o menu</h1>
           <ul>
+            {menu.length === 0 && <OrderPlaceholder/>}
             {menu.map(item=>{
               return(
                 <li onClick={()=>handleMenu(item.id)} key={item.id} className="edit-menu"> 

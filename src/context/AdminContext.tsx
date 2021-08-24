@@ -17,6 +17,8 @@ type AdminContextProps = {
   newOrders: OrdersProps[] | undefined;
   shippingOrders: OrdersProps[] | undefined;
   selectedOrder: OrdersProps | undefined;
+  selectedPage: string;
+  setSelectedPage:(page:string)=>void;
   selectOrderToShowDetails:(id:string)=>void;
   setOrderToShipping:(id:string)=>void;
   endOrder:(id:string)=>void;
@@ -31,12 +33,13 @@ const AdminContext = createContext({} as AdminContextProps);
 
 function AdminContextProvider({children}:ChildrenProps){
   
-  const history = useHistory();
-  const { userAuth } = useAuth();
-  const { menu, setMenu } = useOrder();
   const [ newOrders, setNewOrders ] = useState<OrdersProps[]>();
   const [ shippingOrders, setShippingOrders ] = useState<OrdersProps[]>();
   const [ selectedOrder, setSelectedOrder ] = useState<OrdersProps>();
+  const [ selectedPage, setSelectedPage ] = useState(String);
+  const { userAuth } = useAuth();
+  const { menu, setMenu } = useOrder();
+  const history = useHistory();
 
   
   function handleMenu(id:string){
@@ -155,6 +158,8 @@ function AdminContextProvider({children}:ChildrenProps){
       newOrders,
       shippingOrders,
       selectedOrder,
+      selectedPage,
+      setSelectedPage,
       selectOrderToShowDetails,
       setOrderToShipping,
       endOrder,
