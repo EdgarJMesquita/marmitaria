@@ -22,7 +22,7 @@ export function Shipping(){
     <Container classname="main">
       <Header/>
       <Container classname="desktop">
-        <OrdersList title="Novos pedidos" orders={shippingOrders}/>
+        <OrdersList title="Para entrega" orders={shippingOrders}/>
         <SideOrderDetails />
       </Container>
       <NavBar />

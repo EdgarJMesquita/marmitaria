@@ -16,7 +16,7 @@ import Swal from 'sweetalert';
 type AdminContextProps = {
   newOrders: OrdersProps[] | undefined;
   shippingOrders: OrdersProps[] | undefined;
-  selectedOrder: OrdersProps | undefined;
+  selectedOrder: OrdersProps | null;
   selectedPage: string;
   setSelectedPage:(page:string)=>void;
   selectOrderToShowDetails:(id:string)=>void;
@@ -35,7 +35,7 @@ function AdminContextProvider({children}:ChildrenProps){
   
   const [ newOrders, setNewOrders ] = useState<OrdersProps[]>();
   const [ shippingOrders, setShippingOrders ] = useState<OrdersProps[]>();
-  const [ selectedOrder, setSelectedOrder ] = useState<OrdersProps>();
+  const [ selectedOrder, setSelectedOrder ] = useState<OrdersProps|null>(null);
   const [ selectedPage, setSelectedPage ] = useState(String);
   const { userAuth } = useAuth();
   const { menu, setMenu } = useOrder();
@@ -50,13 +50,12 @@ function AdminContextProvider({children}:ChildrenProps){
 
   async function updateMenu(){
     const userResponse = await Swal('Deseja atualizar o menu?','',{buttons:['Voltar','Confirmar']});
-    userResponse && 
-    database.ref('menu').set(menu, err=>  err && console.log('Error'+err));
-    
+    if(userResponse){
+      database.ref('menu').set(menu, err=>  err && console.log('Error'+err));
+    }
   }
 
   useEffect(() => {
-
     let isFirstLoad = false;
     const ordersRef = database.ref('orders');
 
@@ -91,14 +90,16 @@ function AdminContextProvider({children}:ChildrenProps){
     newOrders && shippingOrders && [...newOrders,...shippingOrders].find(order=>order.id === id)
   )} */
   
-  function selectOrderToShowDetails(id:string|''){
+  function selectOrderToShowDetails(id:string){
     if(!id){
-      setSelectedOrder(undefined);
+      setSelectedOrder(null);
     }
     if(newOrders && shippingOrders){
-       setSelectedOrder([...newOrders,...shippingOrders].find(order=>order.id === id)) 
+      const _selectedOrder = [...newOrders,...shippingOrders].find(order=>order.id === id)?? null;
+      setSelectedOrder(_selectedOrder);
       /* return [...newOrders,...shippingOrders].find(order=>order.id === id); */
     }
+
   }
 
   async function setOrderToShipping(id:string){

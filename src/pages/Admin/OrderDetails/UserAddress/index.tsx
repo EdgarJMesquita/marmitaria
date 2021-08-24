@@ -13,7 +13,7 @@ type AdminOrdersProps = {
 
 
 type UserAddressProps = {
-  address: AdminOrdersProps | undefined;
+  address: AdminOrdersProps | null;
 }
 
 export function UserAddress({address}:UserAddressProps){
