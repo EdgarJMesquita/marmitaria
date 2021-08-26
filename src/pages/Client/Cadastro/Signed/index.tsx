@@ -1,5 +1,5 @@
 // Customs Hooks
-import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '../../../../hooks/useAuth';
 import signOutIcon from '../../../assets/images/signOutIcon.svg';
 // Styles
 import './style.scss';

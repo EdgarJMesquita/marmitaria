@@ -1,5 +1,5 @@
 import { MenuSection } from '../MenuSection';
-import { OrderProps } from '../../../types';
+import { OrderProps } from '../../../../types';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert';
 import './style.scss';

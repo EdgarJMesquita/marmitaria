@@ -1,12 +1,12 @@
 // Components
-import { Basket } from '../../components/Basket';
+import { Basket } from '../../../components/Basket';
 import { Form } from './Form';
 import { SignIn } from './SignIn';
-import { GoBackLink } from '../../components/GoBackLink';
+import { GoBackLink } from '../../../components/GoBackLink';
 // Hooks
-import { useAuth } from '../../hooks/useAuth';
-import { Container } from '../../components/Container';
-import { Header } from '../../components/Header';
+import { useAuth } from '../../../hooks/useAuth';
+import { Container } from '../../../components/Container';
+import { Header } from '../../../components/Header';
 
 export function Cadastro(){
   const { userAuth } = useAuth();

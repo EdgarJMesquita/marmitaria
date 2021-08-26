@@ -1,5 +1,5 @@
-import { useUser } from '../../../hooks/useUser';
-import searchIcon from '../../../assets/images/searchIcon.svg';
+import { useUser } from '../../../../hooks/useUser';
+import searchIcon from '../../../../assets/images/searchIcon.svg';
 import './style.scss';
 
 export function Form(){

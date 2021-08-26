@@ -32,6 +32,7 @@ const AdminContext = createContext({} as AdminContextProps);
 
 
 function AdminContextProvider({children}:ChildrenProps){
+  console.error('admin context called');
   
   const [ newOrders, setNewOrders ] = useState<OrdersProps[]>();
   const [ shippingOrders, setShippingOrders ] = useState<OrdersProps[]>();
@@ -78,6 +79,15 @@ function AdminContextProvider({children}:ChildrenProps){
     ordersRef.on('child_added',(snap)=>{
       if(isFirstLoad){
         newNotification();
+        new Audio('../assets/notification.mp3').play();
+
+        /* Notification.permission !== 'granted'?
+        Notification.requestPermission()
+        :new Notification('Novos pedidos chegaram',{
+          body: `${newOrders?.length} novos pedidos\
+          ${shippingOrders?.length} para entrega`
+        }) */
+          
       }
     });
 
@@ -85,7 +95,7 @@ function AdminContextProvider({children}:ChildrenProps){
       ordersRef.off(); 
     }
   }, [userAuth])
-
+    
 /*   function getOrderDetails(id:string){(
     newOrders && shippingOrders && [...newOrders,...shippingOrders].find(order=>order.id === id)
   )} */

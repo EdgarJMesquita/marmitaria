@@ -1,5 +1,5 @@
-import googleLogo from '../../../assets/images/googleLogo.svg';
-import { useAuth } from '../../../hooks/useAuth';
+import googleLogo from '../../../../assets/images/googleLogo.svg';
+import { useAuth } from '../../../../hooks/useAuth';
 import './style.scss';
 
 export function SignIn(){

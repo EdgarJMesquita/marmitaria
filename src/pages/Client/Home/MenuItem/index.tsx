@@ -1,6 +1,6 @@
-import selectedIcon from '../../../assets/images/selected.svg';
-import { useOrder} from '../../../hooks/useOrder';
-import { OrderProps } from '../../../types';
+import selectedIcon from '../../../../assets/images/selected.svg';
+import { useOrder} from '../../../../hooks/useOrder';
+import { OrderProps } from '../../../../types';
 import './style.scss';
 
 type ItemProps = {

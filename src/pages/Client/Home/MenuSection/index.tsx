@@ -1,7 +1,7 @@
 
 import { MenuItem } from '../MenuItem';
 import { Placeholder } from './Placeholder';
-import { OrderProps } from '../../../types';
+import { OrderProps } from '../../../../types';
 import './style.scss';
 
 type MenuSectionProps = {
