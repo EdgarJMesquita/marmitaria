@@ -12,7 +12,6 @@ type AdminProps = {
   }
 }
 
-
 export function AdminRouter({ match:{ url } }:AdminProps){
   return(
     <AdminContextProvider>
