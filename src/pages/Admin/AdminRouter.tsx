@@ -10,6 +10,7 @@ type AdminProps = {
   match:{
     url:string;
   }
+
 }
 
 export function AdminRouter({ match:{ url } }:AdminProps){

@@ -1,6 +1,5 @@
  
 export function newNotification(){
-  
 
     function notify(){
       const msg = `Você tem um novo pedido`;
