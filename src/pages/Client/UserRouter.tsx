@@ -7,7 +7,7 @@ export function ClientRouter(){
   return(
     <UserContextProvider>
       <Route path="/" exact component={ Home } />
-      <Route path="/cadastro" component={ Cadastro }/>
+      <Route path="/cadastro" component={ Cadastro } />
     </UserContextProvider>
   );
 }

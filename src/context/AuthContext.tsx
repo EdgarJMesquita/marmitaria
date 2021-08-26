@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { firebase, auth } from '../services/firebase';
 import { ChildrenProps } from '../types';
 import Swal from 'sweetalert';
+import { useHistory } from 'react-router';
 
 type UserProps = {
   id: string;
@@ -19,6 +20,7 @@ const AuthContext = createContext({} as AuthContextProps);
 
 function AuthContextProvider({children}:ChildrenProps){
   const [ userAuth, setUserAuth ] = useState<UserProps>();
+  const history = useHistory();
 
   async function signInWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -38,11 +40,12 @@ function AuthContextProvider({children}:ChildrenProps){
   }
 
   async function signOut(){
-    const res = await Swal('Deseja mesmo deslogar?','','warning', {buttons:['Voltar','Confirmar'],dangerMode:true});
+    const res = await Swal('Deseja mesmo deslogar?','','warning', {buttons:['Voltar','Deslogar'],dangerMode:true});
     if(res){
       auth.signOut();
       setUserAuth(undefined);
       Swal('Você se desconectou','','success');
+      history.push('/');
     }
 
   }
