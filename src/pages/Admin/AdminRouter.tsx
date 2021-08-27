@@ -1,5 +1,4 @@
 import { Route } from "react-router";
-import { Login } from "./Login";
 import { NewOrders } from "./NewOrders";
 import { Shipping } from "./Shipping";
 import { OrderDetails } from "./OrderDetails";
@@ -18,8 +17,7 @@ type AdminProps = {
 export function AdminRouter({ match:{ url } }:AdminProps){
   return(
     <AdminContextProvider>
-      <Container classname="desktop">
-        <Route path={`${url}/`} exact component={ Login } />
+      <Container classname="admin-desktop">
         <Route path={`${url}/shipping`} exact component={ Shipping }/>
         <Route path={`${url}/new-orders`} exact component={ NewOrders }/>
         <Route path={`${url}/order-details`} exact component={ OrderDetails }/>

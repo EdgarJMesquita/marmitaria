@@ -5,14 +5,13 @@ import { useHistory } from 'react-router-dom';
 import { useMenu } from '../hooks/useMenu';
 // Utils
 import { newNotification } from '../utils/newNotification';
-import { conveteAddressToURL } from '../utils/converteAddressToURL';
+import { convertAddressToURL } from '../utils/converteAddressToURL';
 // Database Connection
 import { database } from '../services/firebase';
 // Types
 import { ChildrenProps, OrdersProps } from '../types/index';
-
+// Third party library
 import Swal from 'sweetalert';
-
 
 
 type AdminContextProps = {
@@ -21,7 +20,7 @@ type AdminContextProps = {
   selectedOrder: OrdersProps | null;
   selectedPage: string;
   setSelectedPage:(page:string)=>void;
-  selectOrderToShowDetails:(id:string)=>void;
+  selectOrderToShowDetails:(id:string|null)=>void;
   setOrderToShipping:(id:string)=>void;
   endOrder:(id:string)=>void;
   handleMenu:(id:string)=>void;
@@ -31,7 +30,6 @@ type AdminContextProps = {
 type FirebaseOrders = Record<string,OrdersProps>;
 
 const AdminContext = createContext({} as AdminContextProps);
-
 
 function AdminContextProvider({children}:ChildrenProps){
   
@@ -43,27 +41,12 @@ function AdminContextProvider({children}:ChildrenProps){
   const { menu, setMenu } = useMenu();
   const history = useHistory();
 
-  
-  function handleMenu(id:string){
-    const updatedMenu = menu.map(item=>item.id===id? { ...item, isAvailable: !item.isAvailable } : { ...item });
-    setMenu(updatedMenu);
-    
-  }
-
-  async function updateMenu(){
-    const userResponse = await Swal('Deseja atualizar o cardápio?','',{ buttons:['Voltar','Confirmar']});
-    if(userResponse){
-      database.ref('menu').set(menu, (err)=>{ 
-        if(!err){
-          Swal('Cardápio atualizado',{ icon:'success'});
-        
-        } else {
-          Swal('Algo não deu certo','Um erro ocorreu, tente mais tarde ou confira suas credenciais','error');
-          
-        }
-      });
+  useEffect(() => {
+    if(!userAuth){
+      history.push('/login');
     }
-  }
+    
+  }, [userAuth, history])
 
   useEffect(() => {
     let isFirstLoad = true;
@@ -75,7 +58,7 @@ function AdminContextProvider({children}:ChildrenProps){
       const data:FirebaseOrders = snap.val()?? {};
       const arrayOfOrders:OrdersProps[] = Object.entries(data)?.map(([id,value])=>({
         ...value,
-        encodedAddress: conveteAddressToURL(value),
+        encodedAddress: convertAddressToURL(value),
         id
       }));
       
@@ -95,72 +78,67 @@ function AdminContextProvider({children}:ChildrenProps){
       ordersRef.off(); 
     }
   }, [userAuth])
-    
-/*   function getOrderDetails(id:string){(
-    newOrders && shippingOrders && [...newOrders,...shippingOrders].find(order=>order.id === id)
-  )} */
   
-  function selectOrderToShowDetails(id:string){
+
+  
+  function selectOrderToShowDetails(id:string|null){
     if(!id){
       setSelectedOrder(null);
+      return;
     }
     if(newOrders && shippingOrders){
       const _selectedOrder = [...newOrders,...shippingOrders].find(order=>order.id === id)?? null;
       setSelectedOrder(_selectedOrder);
     }
-
   }
 
   async function setOrderToShipping(id:string){
-    
     try {
       await database.ref(`orders/${id}`)
       .update({ status: 'shipping' })
       
       history.push('/admin/new-orders');
-      selectOrderToShowDetails('');
+      setSelectedOrder(null);
       
     } catch (err) {
       Swal('Algo deu errado', 'Tente novamente', 'error');
-      console.log(err);
+      console.error(err);
       
     }
-   /*  database.ref(`orders/${id}`)
-    .update({
-      status: 'shipping'
-    })
-    .then(()=>{
-      history.push('/admin/new-orders');
-      selectOrderToShowDetails('');
-    })  
-    .catch(err=>{
-      Swal('Algo deu errado', 'Tente novamente', 'error');
-      console.log(err);
-    }) */
   }
 
   async function endOrder(id:string){
-    
     try {
       await database.ref(`orders/${id}`).remove()
       Swal('Pedido entregue com sucesso','','success', { timer:2000 });
       history.push('/admin/shipping');
-      selectOrderToShowDetails('');
+      setSelectedOrder(null);
       
-    } catch (error) {
+    } catch (err) {
       Swal('Algo deu errado','Tente novamente','error');
-      
+      console.error(err);
     }
-   /*  database.ref(`orders/${id}`).remove()
-    .then(()=>{
-      Swal('Pedido entregue com sucesso','','success', { timer:2000 });
-      history.push('/admin/shipping');
-      selectOrderToShowDetails('');
+  }
 
-      })
-    .catch(err=>{
-      Swal('Algo deu errado','Tente novamente','error');
-    }) */
+   
+  function handleMenu(id:string){
+    const updatedMenu = menu.map(item=>item.id===id? { ...item, isAvailable: !item.isAvailable } : { ...item });
+    setMenu(updatedMenu); 
+  }
+
+  async function updateMenu(){
+    const userResponse = await Swal('Deseja atualizar o cardápio?','',{ buttons:['Voltar','Confirmar']});
+    if(userResponse){
+      database.ref('menu').set(menu, (err)=>{ 
+        if(!err){
+          Swal('Cardápio atualizado',{ icon:'success'});
+        
+        } else {
+          Swal('Algo não deu certo','Um erro ocorreu, tente mais tarde ou confira suas credenciais','error');
+          
+        }
+      });
+    }
   }
 
   return(

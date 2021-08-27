@@ -11,10 +11,14 @@ body {
 }
 
 :root {
-  --main-color: #ffe194;
+  // Testing new colors
+  --main-color: #3e3e68;
+
+  //Yellowish
+  //--main-color: #ffe194;
+  
   --white: #fff;
-  --headingColor: #4f4f4f;
-  --textColor: #5a5858;
+  --text: #5a5858;
   --whitePlaceholder: #d3d3d8;
 }
 
@@ -73,13 +77,13 @@ main {
     font-size: 120%;
   }
 
-  .desktop {
+  .admin-desktop {
     padding-bottom: 0;
   }
 }
 
 @media screen and (min-width: 1000px){
-  .desktop {
+  .admin-desktop {
     display: flex;
     justify-content: space-around;
 

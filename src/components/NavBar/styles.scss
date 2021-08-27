@@ -10,11 +10,6 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-   /*  &.selected {
-      background-color: #F9E2A8;
-      
-    } */
     
     > div {
       position: relative;
@@ -91,11 +86,10 @@ nav {
         width: 6rem;
         height: 6rem;
         border-radius: 50%;
-        transition: filter 0.3s ease;
+        transition: transform 0.2s ease;
 
         &:hover {
-          background-color: #F9E2A8;
-
+          transform: translateY(-5%)
         }
       }
 

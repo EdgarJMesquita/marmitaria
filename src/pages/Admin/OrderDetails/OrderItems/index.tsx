@@ -1,13 +1,13 @@
-type OrderItensProps = {
-  itens: string[] | undefined
+type OrderItemsProps = {
+  items: string[] | undefined
 }
 
-export function OrderItens({itens}:OrderItensProps){
+export function OrderItems({items}:OrderItemsProps){
   return(
     <>
       <h1>Pedido</h1>
         <ul>
-          {itens?.map((item,index)=>{
+          {items?.map((item,index)=>{
             return(
               <li key={index}>1x {item}</li>
               )

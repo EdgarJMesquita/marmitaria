@@ -9,8 +9,8 @@ import { useAdmin } from '../../hooks/useAdmin';
 import './styles.scss';
 
 export function NavBar(){
-  const history = useHistory();
   const { newOrders, shippingOrders, selectedPage } = useAdmin();
+  const history = useHistory();
 
   return(
     <nav className="navbar">
@@ -39,9 +39,9 @@ export function NavBar(){
         <p>Para entrega</p>
       </div>
       
-      <div onClick={()=>history.push('/admin/edit-menu')}>
+      <div onClick={()=>history.push('/admin/edit-menu')} title="Editar cardápio">
         <div>
-          <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
+          <img src={editIcon} alt="editar cardápio" />
           {selectedPage === 'edit-menu' && <div className="navigation-dot"/>}
         </div>
         <p>Editar Menu</p>
@@ -50,43 +50,3 @@ export function NavBar(){
     </nav>
   )
 }
-
-
-/* 
- <nav className="navbar">
-      
-      <div 
-        onClick={()=>history.push('/admin/new-orders')} 
-        title="Novos pedidos"
-        className={selectedPage === 'new-oselection-dot': ''}>
-        <div>
-          <img src={newOrderIcon} alt="novos pedidos" />
-          <span>{newOrders? newOrders.length:0}</span>
-          {selectedPage === 'new-orders' && <div className="selection-dot" />}
-        </div>
-        <p>Novos pedidos</p>
-      </div>
-
-      <div 
-        onClick={()=>history.push('/admin/shipping')}
-        className={selectedPage === 'shiselection-dot': ''} 
-        title="Pedidos pronto para entrega">
-        <div>
-          <img src={shippingIcon} alt="pedidos prontos para entrega" />
-          <span>{shippingOrders? shippingOrders.length:0}</span>
-          {selectedPage === 'shipping' && <div className="selection-dot"/>}
-        </div>
-        <p>Para entrega</p>
-      </div>
-      
-      <div 
-        onClick={()=>history.push('/admin/edit-menu')} 
-        className={selectedPage === 'editselection-dot': ''}>
-        <div>
-          <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
-          {selectedPage === 'edit-menu' && <div className="selection-dot"/>}
-        </div>
-        <p>Editar Menu</p>
-      </div>
-
-    </nav> */

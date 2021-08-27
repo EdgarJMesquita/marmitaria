@@ -1,19 +1,20 @@
+import { useHistory } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import './style.scss';
 
 export function Header(){
   const { userAuth, signOut } = useAuth();
+  const history = useHistory();
 
   return(
     <header>
-     <h3>The Logo</h3>
+     <h3 onClick={()=>history.push('/')} title="Ir para home">The Logo</h3>
       {userAuth && 
-        <div>
+        <div onClick={signOut}>
           <span>{userAuth.name}</span>
-          <img onClick={signOut} src={userAuth.avatar} alt={userAuth.name}/>
+          <img src={userAuth.avatar} alt={userAuth.name}/>
         </div>
       }
-      
     </header>
   )
 }

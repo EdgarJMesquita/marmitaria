@@ -8,16 +8,20 @@ header {
   justify-content: space-between;
   align-items: center;
 
+  h3 {
+    cursor: pointer;
+  }
+
   div {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
 
     img {
       width: 2rem;
       height: 2rem;
       border-radius: 50%;
-      cursor: pointer;
     }
   }
 }
