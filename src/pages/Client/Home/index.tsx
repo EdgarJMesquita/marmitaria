@@ -2,12 +2,12 @@
 import { Basket } from '../../../components/Basket';
 import { Menu } from './Menu';
 //Hooks
-import { useOrder } from '../../../hooks/useOrder';
+import { useMenu } from '../../../hooks/useMenu';
 import { Container } from '../../../components/Container';
 import { Header } from '../../../components/Header';
 
 export function Home(){
-  const { menu } = useOrder();
+  const { menu } = useMenu();
 
   return(
     <>

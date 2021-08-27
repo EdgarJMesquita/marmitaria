@@ -1,5 +1,5 @@
 import { NavBar } from "../../../components/NavBar";
-import { useOrder } from "../../../hooks/useOrder";
+import { useMenu } from "../../../hooks/useMenu";
 import { useAdmin } from "../../../hooks/useAdmin";
 import { Container } from "../../../components/Container";
 import { Header } from "../../../components/Header";
@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { OrderPlaceholder } from "../../../components/OrdersList/Placeholder";
 
 export function EditMenu(){
-  const { menu } = useOrder();
+  const { menu } = useMenu();
   const { handleMenu, updateMenu, setSelectedPage } = useAdmin();
 
   useEffect(() => {

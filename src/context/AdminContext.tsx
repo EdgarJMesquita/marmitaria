@@ -2,16 +2,17 @@
 import { createContext, useEffect, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom';
-import { useOrder } from '../hooks/useOrder';
+import { useMenu } from '../hooks/useMenu';
 // Utils
 import { newNotification } from '../utils/newNotification';
-import { conveteAddressToURL } from '../utils/conveteAddressToURL';
+import { conveteAddressToURL } from '../utils/converteAddressToURL';
 // Database Connection
 import { database } from '../services/firebase';
 // Types
 import { ChildrenProps, OrdersProps } from '../types/index';
-
 import Swal from 'sweetalert';
+
+
 
 type AdminContextProps = {
   newOrders: OrdersProps[] | undefined;
@@ -32,14 +33,13 @@ const AdminContext = createContext({} as AdminContextProps);
 
 
 function AdminContextProvider({children}:ChildrenProps){
-  console.error('admin context called');
   
   const [ newOrders, setNewOrders ] = useState<OrdersProps[]>();
   const [ shippingOrders, setShippingOrders ] = useState<OrdersProps[]>();
   const [ selectedOrder, setSelectedOrder ] = useState<OrdersProps|null>(null);
   const [ selectedPage, setSelectedPage ] = useState(String);
   const { userAuth } = useAuth();
-  const { menu, setMenu } = useOrder();
+  const { menu, setMenu } = useMenu();
   const history = useHistory();
 
   
@@ -57,11 +57,11 @@ function AdminContextProvider({children}:ChildrenProps){
   }
 
   useEffect(() => {
-    let isFirstLoad = false;
+    let isFirstLoad = true;
     const ordersRef = database.ref('orders');
 
     ordersRef.on('value',snap=>{
-      isFirstLoad = true;
+      isFirstLoad = false;
 
       const data:FirebaseOrders = snap.val()?? {};
       const arrayOfOrders:OrdersProps[] = Object.entries(data)?.map(([id,value])=>({
@@ -77,17 +77,8 @@ function AdminContextProvider({children}:ChildrenProps){
     });
     
     ordersRef.on('child_added',(snap)=>{
-      if(isFirstLoad){
+      if(!isFirstLoad){
         newNotification();
-        new Audio('../assets/notification.mp3').play();
-
-        /* Notification.permission !== 'granted'?
-        Notification.requestPermission()
-        :new Notification('Novos pedidos chegaram',{
-          body: `${newOrders?.length} novos pedidos\
-          ${shippingOrders?.length} para entrega`
-        }) */
-          
       }
     });
 
@@ -107,7 +98,6 @@ function AdminContextProvider({children}:ChildrenProps){
     if(newOrders && shippingOrders){
       const _selectedOrder = [...newOrders,...shippingOrders].find(order=>order.id === id)?? null;
       setSelectedOrder(_selectedOrder);
-      /* return [...newOrders,...shippingOrders].find(order=>order.id === id); */
     }
 
   }

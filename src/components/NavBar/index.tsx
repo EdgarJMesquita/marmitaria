@@ -22,7 +22,7 @@ export function NavBar(){
         <div>
           <img src={newOrderIcon} alt="novos pedidos" />
           <span>{newOrders? newOrders.length:0}</span>
-          {selectedPage === 'new-orders' && <div className="current-selected" />}
+          {selectedPage === 'new-orders' && <div className="navigation-dot" />}
         </div>
         <p>Novos pedidos</p>
       </div>
@@ -34,7 +34,7 @@ export function NavBar(){
         <div>
           <img src={shippingIcon} alt="pedidos prontos para entrega" />
           <span>{shippingOrders? shippingOrders.length:0}</span>
-          {selectedPage === 'shipping' && <div className="current-selected"/>}
+          {selectedPage === 'shipping' && <div className="navigation-dot"/>}
         </div>
         <p>Para entrega</p>
       </div>
@@ -42,7 +42,7 @@ export function NavBar(){
       <div onClick={()=>history.push('/admin/edit-menu')}>
         <div>
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
-          {selectedPage === 'edit-menu' && <div className="current-selected"/>}
+          {selectedPage === 'edit-menu' && <div className="navigation-dot"/>}
         </div>
         <p>Editar Menu</p>
       </div>
@@ -58,33 +58,33 @@ export function NavBar(){
       <div 
         onClick={()=>history.push('/admin/new-orders')} 
         title="Novos pedidos"
-        className={selectedPage === 'new-orders'?'selected': ''}>
+        className={selectedPage === 'new-oselection-dot': ''}>
         <div>
           <img src={newOrderIcon} alt="novos pedidos" />
           <span>{newOrders? newOrders.length:0}</span>
-          {selectedPage === 'new-orders' && <div className="current-selected" />}
+          {selectedPage === 'new-orders' && <div className="selection-dot" />}
         </div>
         <p>Novos pedidos</p>
       </div>
 
       <div 
         onClick={()=>history.push('/admin/shipping')}
-        className={selectedPage === 'shipping'?'selected': ''} 
+        className={selectedPage === 'shiselection-dot': ''} 
         title="Pedidos pronto para entrega">
         <div>
           <img src={shippingIcon} alt="pedidos prontos para entrega" />
           <span>{shippingOrders? shippingOrders.length:0}</span>
-          {selectedPage === 'shipping' && <div className="current-selected"/>}
+          {selectedPage === 'shipping' && <div className="selection-dot"/>}
         </div>
         <p>Para entrega</p>
       </div>
       
       <div 
         onClick={()=>history.push('/admin/edit-menu')} 
-        className={selectedPage === 'edit-menu'?'selected': ''}>
+        className={selectedPage === 'editselection-dot': ''}>
         <div>
           <img src={editIcon} alt="editar cardápio" title="Editar cardápio" />
-          {selectedPage === 'edit-menu' && <div className="current-selected"/>}
+          {selectedPage === 'edit-menu' && <div className="selection-dot"/>}
         </div>
         <p>Editar Menu</p>
       </div>

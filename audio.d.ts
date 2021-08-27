@@ -1,0 +1,1 @@
+declare module 'notification.mp3';

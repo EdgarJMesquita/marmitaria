@@ -28,7 +28,7 @@ nav {
       span {
         position: absolute;
         bottom: 0.6rem;
-        left: 1.9rem;
+        left: 1.7rem;
         background-color: #FEA0A3;
         //background-color: #ffc532;
         //background-color: #FA8938;
@@ -43,14 +43,14 @@ nav {
         
       }
 
-      .current-selected {
+      .navigation-dot {
         position: absolute;
         top: 2.6rem;
-        left: 0.4.5rem;
+        left: 0.45rem;
         background-color: #FEA0A3;
        // background-color: #ffa15e;
-        height: 0.4rem;
-        width: 0.4rem;
+        height: 0.3rem;
+        width: 0.3rem;
         border-radius: 50%;
       }
     }
@@ -67,12 +67,12 @@ nav {
   .main {
     position: relative;
 
-    .orders, .order-details {
-      margin-left: 8rem;
+    .orders {
+      margin-left: 6rem;
     }
 
     nav.navbar {
-      width: 8rem;
+      width: 7rem;
       margin-top: 4.6rem;
       height: 90%;
       position: absolute;
@@ -99,12 +99,13 @@ nav {
         }
       }
 
-      .current-selected {
+      .navigation-dot {
         top: 1rem;
-        right: -2.6rem;
+        right: 0;
+        left: 3.4rem;
         background-color: #FEA0A3;
-        height: 0.4rem;
-        width: 0.4rem;
+        height: 0.3rem;
+        width: 0.3rem;
         border-radius: 50%;
       }
     }

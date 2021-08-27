@@ -1,6 +1,6 @@
 import { OrderProps } from '../../../types';
 import closeImg from '../../../assets/images/close.svg';
-import { useOrder } from '../../../hooks/useOrder';
+import { useMenu } from '../../../hooks/useMenu';
 
 
 type BaskItemProps = {
@@ -8,7 +8,7 @@ type BaskItemProps = {
 }
 
 export function BasketItem({item}:BaskItemProps){
-  const { handleBasket } = useOrder();
+  const { handleBasket } = useMenu();
   return(
     <li onClick={()=>handleBasket(item.id)} key={item.id}>
       <img src={item.image} alt={item.content} />

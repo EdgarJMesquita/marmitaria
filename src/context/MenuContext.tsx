@@ -11,9 +11,9 @@ type ContextProps = {
   setMenu: (id:OrderProps[])=>void;
 }
 
-const OrderContext = createContext({} as ContextProps);
+const MenuContext = createContext({} as ContextProps);
 
-function OrderContextProvider({children}:ChildrenProps){
+function MenuContextProvider({children}:ChildrenProps){
   const [ menu, setMenu] = useState<OrderProps[]>([]);
 
   useEffect(()=>{
@@ -83,16 +83,16 @@ function OrderContextProvider({children}:ChildrenProps){
   }
   
   return(
-    <OrderContext.Provider value={{
+    <MenuContext.Provider value={{
       menu,
       setMenu,
       handleBasket,
       clearOrder
     }}>
       {children}
-    </OrderContext.Provider>
+    </MenuContext.Provider>
   );
 }
 
-export { OrderContext , OrderContextProvider}
+export { MenuContext , MenuContextProvider}
 

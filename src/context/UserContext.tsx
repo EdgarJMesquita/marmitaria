@@ -6,7 +6,7 @@ import { database } from '../services/firebase';
 import { ChildrenProps } from '../types';
 import { useHistory } from 'react-router';
 // Custom Hooks
-import { useOrder } from '../hooks/useOrder';
+import { useMenu } from '../hooks/useMenu';
 import { useAuth } from '../hooks/useAuth';
 // Third party Modal library
 import Swal from 'sweetalert';
@@ -44,7 +44,7 @@ function UserContextProvider(props:ChildrenProps){
   });
   const [ hasFailed, setHasFailed ] = useState(false);
   const { userAuth } = useAuth();
-  const { menu, clearOrder } = useOrder();
+  const { menu, clearOrder } = useMenu();
   const history = useHistory();
 
   useEffect(() => {

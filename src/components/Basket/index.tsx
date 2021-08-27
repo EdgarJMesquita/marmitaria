@@ -1,10 +1,10 @@
 import { BasketItem } from './BasketItem';
-import { useOrder } from '../../hooks/useOrder';
+import { useMenu } from '../../hooks/useMenu';
 import './styles.scss';
 
 
 export function Basket(){
-  const { menu } = useOrder();
+  const { menu } = useMenu();
   return(
     <ul className="basket">
       { menu.map(item=>{
