@@ -1,5 +1,5 @@
-// Hooks
 import { createContext, useEffect, useState } from 'react';
+// Hooks
 import { useAuth } from '../hooks/useAuth';
 import { useHistory } from 'react-router-dom';
 import { useMenu } from '../hooks/useMenu';
@@ -10,6 +10,7 @@ import { conveteAddressToURL } from '../utils/converteAddressToURL';
 import { database } from '../services/firebase';
 // Types
 import { ChildrenProps, OrdersProps } from '../types/index';
+
 import Swal from 'sweetalert';
 
 
@@ -50,9 +51,17 @@ function AdminContextProvider({children}:ChildrenProps){
   }
 
   async function updateMenu(){
-    const userResponse = await Swal('Deseja atualizar o menu?','',{buttons:['Voltar','Confirmar']});
+    const userResponse = await Swal('Deseja atualizar o cardápio?','',{ buttons:['Voltar','Confirmar']});
     if(userResponse){
-      database.ref('menu').set(menu, err=>  err && console.log('Error'+err));
+      database.ref('menu').set(menu, (err)=>{ 
+        if(!err){
+          Swal('Cardápio atualizado',{ icon:'success'});
+        
+        } else {
+          Swal('Algo não deu certo','Um erro ocorreu, tente mais tarde ou confira suas credenciais','error');
+          
+        }
+      });
     }
   }
 

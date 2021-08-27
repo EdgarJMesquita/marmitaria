@@ -5,10 +5,11 @@ import { AuthContextProvider } from './context/AuthContext';
  
 // Sub Routes
 import { AdminRouter } from './pages/Admin/AdminRouter';
-import { ClientRouter } from './pages/Client/UserRouter';
+import { Cadastro } from './pages/Client/Cadastro';
+import { Home } from './pages/Client/Home';
+//import { NotFound } from './pages/NotFound';
 
 import './styles/global.scss';
-import { NotFound } from './pages/NotFound';
 
 export default function App() {
   return (
@@ -16,9 +17,10 @@ export default function App() {
       <Switch>
         <AuthContextProvider>
           <MenuContextProvider>
-            <Route path="/" component={ ClientRouter }/> 
+            <Route path="/" exact component={ Home }/>
+            <Route path="/cadastro" component={ Cadastro }/>
             <Route path="/admin" component={ AdminRouter }/>
-            <Route path="*" component={ NotFound }/>
+            {/* <Route path="*" component={ NotFound }/> */}
           </MenuContextProvider>
         </AuthContextProvider>
       </Switch>

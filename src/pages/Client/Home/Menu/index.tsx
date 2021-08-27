@@ -23,13 +23,12 @@ export function Menu({menu}:MenuProps){
 
   return(
     <div className="menu">
-        <MenuSection title="Misturas" foodType="misturas" menu={menu}/>
-        <MenuSection title="Guarnições" foodType="guarnicoes" menu={menu}/>
-        {/* <MenuSection title="Bebidas" foodType="guarnicoes" menu={[]}/> */}
-        <div className="btn-con">
-          <button onClick={checkOrder} >Continuar</button>
-        </div>
-        {/* <Button clickFunction={checkOrder} text="Continuar" type="button"/> */}
+      <MenuSection title="Misturas" foodType="misturas" menu={menu}/>
+      <MenuSection title="Guarnições" foodType="guarnicoes" menu={menu}/>
+      {/* <MenuSection title="Bebidas" foodType="guarnicoes" menu={[]}/> */}
+      <div className="btn-con">
+        <button onClick={checkOrder} >Continuar</button>
+      </div>
     </div>
   )
 }

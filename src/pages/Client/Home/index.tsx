@@ -10,12 +10,10 @@ export function Home(){
   const { menu } = useMenu();
 
   return(
-    <>
-      <Container classname="main">
-        <Header />
-        <Menu menu={menu}/>
-        <Basket />
-      </Container>
-    </>
+    <Container classname="main">
+      <Header />
+      <Menu menu={menu}/>
+      <Basket />  
+    </Container>
   )
 }

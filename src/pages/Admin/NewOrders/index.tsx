@@ -1,10 +1,6 @@
-import { Container } from '../../../components/Container';
-import { Header } from '../../../components/Header';
-import { NavBar } from '../../../components/NavBar';
-import { SideOrderDetails } from '../../../components/SideOrderDetails';
+import { useEffect } from 'react';
 import { useAdmin } from '../../../hooks/useAdmin';
 import { OrdersList } from '../../../components/OrdersList';
-import { useEffect } from 'react';
 
 
 export function NewOrders(){
@@ -20,13 +16,6 @@ export function NewOrders(){
   }, [setSelectedPage]);
 
   return(
-    <Container classname="main">
-      <Header />
-      <div className="desktop">
-        <OrdersList title="Novos pedidos" orders={newOrders}/>
-        <SideOrderDetails />
-      </div>
-      <NavBar />
-    </Container>
+    <OrdersList title="Novos pedidos" orders={newOrders}/>
   )
 }

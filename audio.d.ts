@@ -1,1 +1,1 @@
-declare module 'notification.mp3';
+declare module '.*mp3';
