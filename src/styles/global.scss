@@ -18,7 +18,7 @@ body {
   --whitePlaceholder: #d3d3d8;
 }
 
-.main {
+main {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@ body {
 }
 
 @media screen and (min-width: 500px){
-  .main {
+  main {
     overflow: hidden;
 
     .menu, .cadastro {

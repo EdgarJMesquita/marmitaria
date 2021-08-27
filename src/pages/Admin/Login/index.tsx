@@ -58,14 +58,12 @@ export function Login(){
   }
 
   return(
-    <Container classname="main">
-      <Container classname="admin-login">
-        <h3>Efetue o Login para continuar</h3>
-        <button className="google-btn" onClick={handleSignInWithGoogle} >
-          <img src={googleLogo} alt="google logo" />
-          <span>Login com Google</span>
-        </button>
-      </Container>
+    <Container classname="admin-login">
+      <h3>Efetue o Login para continuar</h3>
+      <button className="google-btn" onClick={handleSignInWithGoogle} >
+        <img src={googleLogo} alt="google logo" />
+        <span>Login com Google</span>
+      </button>
     </Container>
   )
 }

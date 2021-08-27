@@ -6,7 +6,6 @@ import { Container } from '../../../components/Container';
 // Hooks
 import { useAuth } from '../../../hooks/useAuth';
 import { UserContextProvider } from '../../../context/UserContext';
-import { Header } from '../../../components/Header';
 import { Basket } from '../../../components/Basket';
 
 export function Cadastro(){
@@ -14,15 +13,12 @@ export function Cadastro(){
 
   return(
     <UserContextProvider>
-      <Container classname="main">
-        <Header />
-        <Container classname="cadastro">
-          {!userAuth && <SignIn/>}
-          <Form />
-          <GoBackLink />
-        </Container>
-        <Basket />
+      <Container classname="cadastro">
+        {!userAuth && <SignIn/>}
+        <Form />
+        <GoBackLink />
       </Container>
+      <Basket />
     </UserContextProvider>
   )
 }
